@@ -1,0 +1,8 @@
+tqdm
+tzdata
+requests
+streamlit
+prettytable
+humanize
+tzlocal
+pre-commit
