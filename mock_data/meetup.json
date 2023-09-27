@@ -1,0 +1,2584 @@
+{
+    "data": {
+      "rankedEvents": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "cmVjU291cmNlOnJhbmtlZC1ldmVudHMtYnktdGltZSxpbmRleDoyMA==",
+          "__typename": "PageInfo"
+        },
+        "count": 19,
+        "edges": [
+          {
+            "node": {
+              "id": "296182900",
+              "title": "Online Discovery",
+              "dateTime": "2023-09-30T10:00+01:00",
+              "endTime": "2023-09-30T11:00+01:00",
+              "description": "Ever 2 weeks, we meet for a new discovery. We'll go through a mindset tool together, step by step. This is designed to create inner reflection and deeper self understanding.\n\n**How it works:**\n\n* We'll welcome each other\n* I'll explain what mindset tool we'll be working with\n* We'll go through it step by step\n* We'll share our reflections at the end\n\nBefore the meet, you may have thoughts of... \"Do I really want to do this?\" / \"What if it's weird?\" / \"What if I feel awkward?\" It's normal to have these thoughts. We experience this any time we go out of our comfort zone.\n\nI look forward to meeting with you,\n\nShay\n\nP.S - Please join 2 minutes or so ahead of the start time, so that we're ready to go.",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515895323",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/b/d/b/highres_515895323.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/mindful-men-meetup-group/events/296182900",
+              "group": {
+                "id": "37285125",
+                "slug": "mindful-men-meetup-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": true,
+                "name": "Mindful Men - Meetup Group",
+                "urlname": "mindful-men-meetup-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/mindful-men-meetup-group",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "515895066",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/a/d/a/highres_515895066.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 9,
+              "maxTickets": 10,
+              "tickets": {
+                "count": 9,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1971083461",
+                      "user": {
+                        "id": "330703246",
+                        "name": "Shay Doran",
+                        "memberPhoto": {
+                          "id": "314830777",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971197457",
+                      "user": {
+                        "id": "388192670",
+                        "name": "Conor McDermott",
+                        "memberPhoto": {
+                          "id": "314794213",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971322268",
+                      "user": {
+                        "id": "399539036",
+                        "name": "Rupesh Dutta",
+                        "memberPhoto": {
+                          "id": "316479630",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": true,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "bdc509ff-571b-4b5c-9c3e-e70497e30263",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "294911314",
+              "title": "Excel Online Training - Learn Pivot Tables",
+              "dateTime": "2023-09-26T20:00+01:00",
+              "endTime": "2023-09-26T21:00+01:00",
+              "description": "**Pivot tables, pivot table, pivot tables!**\n\nPivot tables are great for analysis. In this session I will discuss what pivot tables are and when to use them. I will also show you how I use it. Join this session if you would like an introduction to pivot tables and want to know how to use it for your benefit.\n\nThis is a live online session. You will be free to ask questions and you will see me creating pivot tables in the session.\n\n**What you can expect from this session:-**\n\n* Brief introduction to pivot tables\n\n* See how pivot tables are used for analysis\n\n* Create different types of pivot table\n\n* Modify pivot tables\n\nIf this is something that you can benefit from then sign up. You will get a helpful introduction to pivot tables and see how to create them.\n\nThis session is great for those that are new to pivot tables or those that want a refresher.\n\nThe speaker will be Margaret Boukadia, she is an online Excel Trainer. She has trained many professionals and freelancers in Excel. If you would like personal online Excel lessons, then send a private message to host.\n\nHope to see you on the other side.",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "502225870",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/6/5/0/e/highres_502225870.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/excel-made-simple/events/294911314",
+              "group": {
+                "id": "36139284",
+                "slug": "excel-made-simple",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Excel Made Simple (for beginners and intermediates)",
+                "urlname": "excel-made-simple",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/excel-made-simple",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "501801197",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/5/2/c/d/highres_501801197.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 46,
+              "maxTickets": 35,
+              "tickets": {
+                "count": 46,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1964095208",
+                      "user": {
+                        "id": "229999217",
+                        "name": "Margaret Boukadia",
+                        "memberPhoto": {
+                          "id": "300066999",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1968309268",
+                      "user": {
+                        "id": "400770647",
+                        "name": "Adeola Ade-Alao",
+                        "memberPhoto": {
+                          "id": "0",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969136752",
+                      "user": {
+                        "id": "367817202",
+                        "name": "Mikhail Bogovalov",
+                        "memberPhoto": {
+                          "id": "311837825",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295168877",
+              "title": "How to quickly analyse data using pivot tables",
+              "dateTime": "2023-09-26T20:00+01:00",
+              "endTime": "2023-09-26T21:00+01:00",
+              "description": "Hello there,\n\n**Would you like to learn how to analyse data quickly using pivot tables?**\n\nDo you work with data and sometimes you just need to get quick answers from the data?\n\n**Join us to analyse data quickly using pivot tables.**\n\nIn this 1 hour online session, I will demonstrate how easy it is to do it using a pivot table. I will be working with data, and will create a pivot table to quickly analyse the data to get questions answered.\n\nCome and join us. I would advice that join us using a laptop so that you can follow along.\n\n**Who is this session for**\n\n* people that have a good foundation in Excel\n\n* people that quickly want questions answers from data\n\n* people who want a refresher in pivot tables\n\n* people that are new to pivot tables\n\n**What you will learn from this session**\n\n* to quickly know how to get answers from data\n\n* to use pivot tables quickly and simply\n\nIf you want to take personalised Excel lessons (online), then visit https://excelmadesimple.odoo.com/",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "514821462",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/5/3/d/6/highres_514821462.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/business-data-analytics-uk/events/295168877",
+              "group": {
+                "id": "37129816",
+                "slug": "business-data-analytics-uk",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Business Data Analytics UK",
+                "urlname": "business-data-analytics-uk",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/business-data-analytics-uk",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "f56b4a6f-e723-4e0d-8934-550e361a3074",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/event/",
+                  "source": null,
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 54,
+              "maxTickets": 40,
+              "tickets": {
+                "count": 54,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1965497868",
+                      "user": {
+                        "id": "229999217",
+                        "name": "Margaret Boukadia",
+                        "memberPhoto": {
+                          "id": "300066999",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1965498700",
+                      "user": {
+                        "id": "373627962",
+                        "name": "Ebenezer Asare",
+                        "memberPhoto": {
+                          "id": "312943611",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1965498816",
+                      "user": {
+                        "id": "370558168",
+                        "name": "iren",
+                        "memberPhoto": {
+                          "id": "313904516",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "296153689",
+              "title": "Alternative Networking and Sharing",
+              "dateTime": "2023-09-26T20:00+01:00",
+              "endTime": "2023-09-26T21:00+01:00",
+              "description": "Hi Lovely sparks of divine essence,\nIm excited to be hosting this first networking and sharing online event.\n\nJump onboard and tell the world about your 'woo woo' services!\nPromote your product or enthuse about your offerings.\nListen in to what others have on offer, share an inspiring read.\nMake connections with like-minded people, meet others with similar visions and values.\n\n**The format:**\nLog onto the event page at 8pm.\nE﻿veryone gets equal time to talk. I will share all participants contact details on a pdf. You are then free to arrange in your own time to contact those with whom you resonate.\n\nThats it. No cold sausage rolls, no early mornings, no rubbish coffee, and no more awkwardly sliding out of a conversation with an insurance salesman and an I.T consultant.\n\nI﻿f you do not have a service or product to offer, please use your time to share your inspirations, recommendations or ideas.\n\nP﻿lease DO promote your own groups if you are a facilitator yourself.\nP﻿lease do actively listen to each participants pitch.\nAfterwards, p﻿lease do actively support others by suggesting/recommending them to your extended networks, friends, family, colleagues who may be interested.\n\n**P﻿reparation prior to the meeting**\n\nPlease prepare a verbal pitch that fits inside of 3 minutes that describes what you do, what you are offering and what you are looking for. Remember to state if you are location based or online.\n\nPlease prepare a piece of text to share with other participants that looks like this: **Your name. Your business name or role. Your website. Your preferred contact number/email. Short description of your business/offerings, max three lines.** I will collect and compile into a pdf to distribute to all.\n\nP﻿lease share this event with your friends, acquaintances, and social media. There's nothing quite like it out there, and the more onboard the better chance we all have of success!\n\nIm looking forward to seeing all of your smiley successful faces :)",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515912793",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/8/0/1/9/highres_515912793.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/alternative-networking-group/events/296153689",
+              "group": {
+                "id": "37128950",
+                "slug": "alternative-networking-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Alternative Networking and Sharing",
+                "urlname": "alternative-networking-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/alternative-networking-group",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "515036969",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/d/e/8/9/highres_515036969.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 10,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 10,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1970926069",
+                      "user": {
+                        "id": "11763580",
+                        "name": "Red",
+                        "memberPhoto": {
+                          "id": "316376152",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971080513",
+                      "user": {
+                        "id": "402059099",
+                        "name": "Beverley",
+                        "memberPhoto": {
+                          "id": "316740525",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971442986",
+                      "user": {
+                        "id": "400453774",
+                        "name": "Energy Clearing 1111",
+                        "memberPhoto": {
+                          "id": "316455765",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_APPROVAL",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "296212831",
+              "title": "FREE SOCIAL ENGLISH CLASS  🇬🇧 | 18-30 YEARS OLD | LEARN | SKILLS",
+              "dateTime": "2023-09-26T20:00+01:00",
+              "endTime": "2023-09-26T21:00+01:00",
+              "description": "Hey Everyone,\n\nThis is an awesome group for English classes. My name is Danish from London [🇬🇧](https://emojipedia.org/flag-united-kingdom),\n\nThe event will be @ 8:00PM UK 🇬🇧 time,\n\nIf you are interested in speaking English in an easy way where you can have day-to-day conversations with anyone from native speakers to local speakers this is the right place for you. The event Is for 18-30 Years old.\n\nI will teach you how to have a basic conversation with an individual and also be able to understand and speak English in a non-academic way where it isn't boring.\n\n**Important**: Do not join, if you want to learn English as an academic or for qualification purposes, this is just for students or learners who want to be able to speak English naturally for conversation purposes.\n\nThe Zoom Class will be Free with other members. I also provide 1 to 1 free English class over the Zoom. The reason why I want to help is because I understand how tough it can be to learn English when you don't have a native speaker who can teach you the right way.\n\nThe Event length will be 30-60 mins, so if you can spare 30 minutes to join the class then you can.\n\nfor any questions, you can message me on WhatsApp +447930849679",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515993948",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/d/2/b/c/highres_515993948.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/london-getaways-meetup-group/events/296212831",
+              "group": {
+                "id": "37261811",
+                "slug": "london-getaways-meetup-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": true,
+                "name": "SOCIAL GROUP FOR 18-30 YEARS OLD",
+                "urlname": "london-getaways-meetup-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/london-getaways-meetup-group",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "515940655",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/2/8/f/highres_515940655.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 9,
+              "maxTickets": 15,
+              "tickets": {
+                "count": 9,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1971253185",
+                      "user": {
+                        "id": "370282685",
+                        "name": "Danish",
+                        "memberPhoto": {
+                          "id": "316759244",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971333665",
+                      "user": {
+                        "id": "354143257",
+                        "name": "Thea Lui",
+                        "memberPhoto": {
+                          "id": "309131655",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971772714",
+                      "user": {
+                        "id": "403011736",
+                        "name": "Njomza Krasniqi",
+                        "memberPhoto": {
+                          "id": "316904021",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": true,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "296172947",
+              "title": "Become A Home Based Travel Agent",
+              "dateTime": "2023-09-26T20:30+01:00",
+              "endTime": "2023-09-26T21:00+01:00",
+              "description": "Join my zoom call to learn how to become a home based travel agent with the original and largest home based host agency Inteletravel. You will have the opportunity to earn uncapped commission and benefit from travelling yourself for less as an agent. There are no minimum targets as you will be starting your own own online business and finding your own network to sell travel to. With ongoing 1:1 support and structured training, no experience is required. There is a one off fee of £156 which pays for the travel license and then business monthly running costs of £46. This fee also gives you access to over 85 suppliers systems, 24/7 customer service desk, use of ABTA & ATOL insurance, cruise line license, ongoing education and support and accounts service. It also gives you access to the network marketing matrix whereby if you refer others into the agency and build a team you will earn a residual and willable income and unlock up to 7 pay days per month. With no minimum subscription term and 3 x money back guarantees in place, there is no better time to join and learn the business ready for the boom in travel sales seen from Sept through to January for 2024 travel bookings",
+              "duration": "PT30M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515653497",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/4/b/9/highres_515653497.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/make-travel-pay/events/296172947",
+              "group": {
+                "id": "37265592",
+                "slug": "make-travel-pay",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": true,
+                "name": "Make Travel Pay",
+                "urlname": "make-travel-pay",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/make-travel-pay",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "516130720",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/2/9/e/0/highres_516130720.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 20,
+              "maxTickets": 50,
+              "tickets": {
+                "count": 20,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1971028595",
+                      "user": {
+                        "id": "399247954",
+                        "name": "Nadine Buckley",
+                        "memberPhoto": {
+                          "id": "316250139",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971439428",
+                      "user": {
+                        "id": "303483808",
+                        "name": "Tem",
+                        "memberPhoto": {
+                          "id": "297887105",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971464560",
+                      "user": {
+                        "id": "356791897",
+                        "name": "Ted Barker",
+                        "memberPhoto": {
+                          "id": "316869421",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": true,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295950397",
+              "title": "Webinar | Composable banking: Driving transformation in financial services",
+              "dateTime": "2023-09-27T12:00+01:00",
+              "endTime": "2023-09-27T13:00+01:00",
+              "description": "**Register here: https://bit.ly/44EvdNv**\n\n**Join Thoughtworks’ Principal Consultant, Omar Bashir, and AWS’ Senior Solution Architect, Dogus Gucsav, as they discuss how banks can innovate with speed and stability by unlocking the full potential of cloud-native composability.**\n\nDuring this webinar you will learn:\n\n* The benefits of a cloud-native composable banking approach\n* Strategic factors to consider when executing cloud-native composable banking\n* Practical application of cloud-native composable banking\n\nWe hope you can join.\nThanks,\nThoughtworks",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515696429",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/d/c/6/d/highres_515696429.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": null,
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/thoughtworks-events/events/295950397",
+              "group": {
+                "id": "20424697",
+                "slug": "Thoughtworks-Events",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Thoughtworks Events",
+                "urlname": "Thoughtworks-Events",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/thoughtworks-events",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "497234003",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/6/b/3/highres_497234003.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 14,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 14,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969819660",
+                      "user": {
+                        "id": "202839310",
+                        "name": "Thoughtworks",
+                        "memberPhoto": {
+                          "id": "305829525",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969824435",
+                      "user": {
+                        "id": "239922930",
+                        "name": "Parissa",
+                        "memberPhoto": {
+                          "id": "271924303",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969826947",
+                      "user": {
+                        "id": "155683082",
+                        "name": "Maxim Avezbakiev",
+                        "memberPhoto": {
+                          "id": "210252912",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295956470",
+              "title": "Samanta AIWriter (Article Generation App). A product of Uxlivinglab.",
+              "dateTime": "2023-09-27T12:30+01:00",
+              "endTime": "2023-09-27T13:30+01:00",
+              "description": "**Samanta helps you automate your social media accounts. Samanta’s time-saving excellence allows you to generate high-quality articles and images effortlessly.**\n\n*The automation of social media tasks can save time and effort by reducing the need for manual intervention. This is particularly useful for businesses with limited resources or individuals managing multiple social media accounts.*\n\n**We are offering a special 100% discount for “All First Time Attendees” for the first month. Grab the offer today, start using “Samanta AIWriter”, and automate your social media accounts for one month.**\n\nHow to join?\n\nPlease click on 'Attend Online' to RSVP to get the Zoom link.",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515626001",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/b/3/b/1/highres_515626001.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/london-social-media-marketing-meetup-group/events/295956470",
+              "group": {
+                "id": "37260549",
+                "slug": "london-social-media-marketing-meetup-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": true,
+                "name": "Automate your social media with Samanta",
+                "urlname": "london-social-media-marketing-meetup-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/london-social-media-marketing-meetup-group",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "515562560",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/a/6/4/0/highres_515562560.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 9,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 9,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969852200",
+                      "user": {
+                        "id": "401158642",
+                        "name": "Md. Robin",
+                        "memberPhoto": {
+                          "id": "316623420",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971368292",
+                      "user": {
+                        "id": "402222626",
+                        "name": "RK Wadhwani",
+                        "memberPhoto": {
+                          "id": "0",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971438287",
+                      "user": {
+                        "id": "402200811",
+                        "name": "Ahmed Zia",
+                        "memberPhoto": {
+                          "id": "316853905",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": true,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295950588",
+              "title": "Slow Session",
+              "dateTime": "2023-09-27T13:00+01:00",
+              "endTime": "2023-09-27T14:15+01:00",
+              "description": "Come and relax with us in a midweek resistance of speediness.\n\nBe less productive, less efficient, more lazy! Drop your shoulders, sink into your chair / bed / grass, stretch your limbs and luxuriate in nothingness for a little while.\n\nWhat to expect:\n\n* A poem or reading to open the space\n* Check-in to set intentions\n* A mantra:\n*I have the permission to slow down*\n*I have nothing to achieve here*\n*I can rest, daydream and play here*\n*I am a human, being*\n* 45+ mins of REST/PLAY/LEISURE\n* Check out to close\n\n**Zoom link becomes available when you RSVP :)**\n\n[Explore Living The Good Life](https://www.huddlecraft.com/huddles/living-the-good-life)\n[Explore The Slow Work Garden](http://theslowworkgarden.com/)\n\n[Donate to help keep our work going!](https://paypal.me/slcravenchange?country.x=GB&locale.x=en_GB)\n\n***This is a welcoming, open space in which we may be sharing openly and vulnerably and therefore we take everyone’s safety very seriously. So we have a code of conduct that we ask everyone to follow for the benefit of the group in order to make sure this space is safe for all participants:***\n\n* ***Cameras on at the beginning of the call, face visible***\n* ***Verbal greeting at the beginning of the call***\n* ***The same (real) name on Zoom as on your Meetup profile***\n\n***We reserve the right to remove participants without notice if we have any concerns around safety.***",
+              "duration": "PT1H15M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/living-the-good-life-x-the-slow-work-garden/events/295950588",
+              "group": {
+                "id": "37051322",
+                "slug": "living-the-good-life-x-the-slow-work-garden",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Living The Good Life x The Slow Work Garden",
+                "urlname": "living-the-good-life-x-the-slow-work-garden",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/living-the-good-life-x-the-slow-work-garden",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "512776105",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/e/e/9/highres_512776105.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 6,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 6,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969820698",
+                      "user": {
+                        "id": "352386686",
+                        "name": "Sophie Craven",
+                        "memberPhoto": {
+                          "id": "316456660",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1970859301",
+                      "user": {
+                        "id": "211024831",
+                        "name": "Maria Dorthea Skov",
+                        "memberPhoto": {
+                          "id": "313609074",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971002299",
+                      "user": {
+                        "id": "401635299",
+                        "name": "Tim Larcombe",
+                        "memberPhoto": {
+                          "id": "316668280",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "296205885",
+              "title": "Unlocking the Power of Knowledge Graphs for Gen AI in Enterprise Environments",
+              "dateTime": "2023-09-27T17:00+01:00",
+              "endTime": "2023-09-27T18:00+01:00",
+              "description": "**To access this webinar, please register here: [https://hubs.li/Q021Rn6z0](https://hubs.li/Q021Rn6z0)**\n\n**Topic:** “Unlocking the Power of Knowledge Graphs for Generative AI in Enterprise Environments”\n\n**Speaker:** Sean Martin, CTO & Co–Founder of Cambridge Semantics\nSean's experience covers multiple aspects of starting and growing a software company, including holding various titles from President through to co-lead dish washer. He continues in a leadership role as CTO and serves on the board.\n\n**Abstract:**\nJoin us for an insightful exploration of how Knowledge Graphs are revolutionizing the way enterprises harness the capabilities of Generative AI.\n\n**Webinar Highlights:**\n*\\- Understand the rapid rise and significance of Generative AI in the data sphere\\.*\n*\\- Discover the challenges and risks associated with implementing Generative AI in enterprise settings\\.*\n*\\- Learn how Knowledge Graphs serve as a foundational technology to address these challenges\\.*\n*\\- Explore how Knowledge Graphs enable accurate responses to natural language queries and ensure data provenance\\.*\n*\\- Dive into legal considerations\\, access controls\\, and data privacy in the context of Generative AI\\.*\n*\\- Get practical insights on implementing Knowledge Graphs for Generative AI with real\\-world case studies\\.*\n*\\- Engage in a Q&A session with experts in the field\\.*\n\n**Why Attend?**\nIn less than a year, Generative AI has transformed from a niche technology to a sought-after capability across industries. However, unlocking its potential in enterprise environments requires addressing critical concerns related to accuracy, privacy, and legality. This webinar will equip you with the knowledge and strategies to make Generative AI a success within your organization.\n\n**Who Should Attend:** \\- Data Scientists \\- AI Enthusiasts \\- Business Leaders \\- IT Professionals \\- Decision\\-makers\n\n**ODSC Links:**\n• Get free access to more talks/trainings like this at Ai+ Training platform:\n[https://hubs.li/H0Zycsf0](https://hubs.li/H0Zycsf0)\n• ODSC blog: [https://opendatascience.com/](https://opendatascience.com/)\n• Facebook: [https://www.facebook.com/OPENDATASCI](https://www.facebook.com/OPENDATASCI)\n• Twitter: [https://twitter.com/_ODSC](https://twitter.com/_ODSC) & @odsc\n• LinkedIn: [https://www.linkedin.com/company/open-data-science](https://www.linkedin.com/company/open-data-science)\n• Slack Channel: [https://hubs.li/Q01_Yrgb0](https://hubs.li/Q01_Yrgb0)\n• Code of conduct: [https://odsc.com/code-of-conduct/](https://odsc.com/code-of-conduct/)",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515984595",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/a/e/3/3/highres_515984595.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "other",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/odsc-london-ai-for-engineers/events/296205885",
+              "group": {
+                "id": "32790442",
+                "slug": "odsc-london-ai-for-engineers",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "ODSC London - AI for Engineers",
+                "urlname": "odsc-london-ai-for-engineers",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/odsc-london-ai-for-engineers",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "485044014",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/f/a/e/highres_485044014.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 9,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 9,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1971207278",
+                      "user": {
+                        "id": "265917471",
+                        "name": "Iryna Pidkovych",
+                        "memberPhoto": {
+                          "id": "281682185",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971208626",
+                      "user": {
+                        "id": "399833342",
+                        "name": "Supreet Kaur",
+                        "memberPhoto": {
+                          "id": "316514709",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971216428",
+                      "user": {
+                        "id": "402651198",
+                        "name": "Michael Ilori",
+                        "memberPhoto": {
+                          "id": "0",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295822230",
+              "title": "Should we invite AI into our teams and organisations to improve agility?",
+              "dateTime": "2023-09-27T17:30+01:00",
+              "endTime": "2023-09-27T18:30+01:00",
+              "description": "🤖Should we invite AI into our teams and organisations to improve agility?🤖\n\nJoin our thought-provoking debate which will challenge your perceptions and reshape the way you think about AI. Adam, Jas & Ricardo will present compelling arguments exploring potential benefits, challenges and ethical considerations (+some live demos). Will AI enhance agility and help us stay ahead in today's fast paced world? Or does it threaten to disrupt the very essence of human collaboration and creativity?\n\nBring your burning questions and get ready to cast your vote...*Will you happily welcome AI into your team and organisations by the end of the year to improve agility?*\n\n🕕**AGENDA (GMT)**\n\n17:30-17:40: Kick Off, Introductions + Live Poll\n\n17:40-18:10: 8 minute Lightning Debates - Jas, Adam & Ricardo\n\n18:10-18:30: Panel Discussion, Audience Q&A + Live Poll\n\n**IMPORTANT NOTES**\n\n* I will begin admitting people into the call at 17:30. Before that, you will be on a waitlist to enter.\n* Please ensure you're muted at all times to minimise disturbance.\n* If you would like to ask a question during the talk, use the Chat.\n\n🗣️**ABOUT THE SPEAKERS**\n\n**Adam Hall**\n*Principal technologist, AND Digital*\nAdam Hall has worked as a Tech Leader and an Agile Coach since the turn of the millennium. He's passionate about solving human problems with technology and knows that teams working closely together is the way to improve the products we create. Adam is worried about the future and will do anything in his power to ensure that AI adoption is done responsibly and intentionally for the betterment of humanity. If he doesn't, the short slide to robotic domination will be the future that is inherited by his 3 boys. His dog is indifferent to the incoming android apocalypse.\n\n**Jas Singh**\n*Director of Agile Coaching, Five AI*\nJas made the switch from disillusioned waterfall battler to agile over 15 years ago and has not looked back. Having built coaching teams with a focus on the system, he now adds his professional coaching skills to support growth in this ever increasingly complex world. The theme of AI is front and centre, as he aids much smarter folk than him in tackling the Autonomous driving problem head on, hoping to be more part of the steering function than a passenger.\n\n**Ricardo Liberato**\n*Chief Principal Consultant, Solid Reason*\nRicardo brings a wealth of experience in scaling agile efficiently across various teams and groups, capitalising on lean principles and Gail’s law as the foundation of his work. He is the co-host of the enterprise agility podcast, where he brings his scepticism for the agile industrial complex into the hot topics on enterprise agility. Ricardo is passionate about exploring the intersection between AI technology and agile methodologies to create sustainable, high performing agile teams and agile enterprises. In his spare time he is a software developer building DevOps observability systems for large corporations, pioneering applying natural language processing and large language models to self service observability.\n\nFacilitated by **Jessica Allen**\n*Agile Coach, AND Digital*\n\nSave the date! 📆",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515548305",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/6/e/9/1/highres_515548305.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/agnosticagile/events/295822230",
+              "group": {
+                "id": "1712070",
+                "slug": "agnosticagile",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Agnostic Agile",
+                "urlname": "agnosticagile",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/agnosticagile",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "513485735",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/1/6/6/7/highres_513485735.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 92,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 92,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969436828",
+                      "user": {
+                        "id": "250655247",
+                        "name": "Jess Allen",
+                        "memberPhoto": {
+                          "id": "287904547",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969437768",
+                      "user": {
+                        "id": "277291489",
+                        "name": "Roberto Quintanilha",
+                        "memberPhoto": {
+                          "id": "286421284",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969437771",
+                      "user": {
+                        "id": "216311365",
+                        "name": "Rob Hemsley",
+                        "memberPhoto": {
+                          "id": "273634087",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295213877",
+              "title": "UX/UI Design Course",
+              "dateTime": "2023-09-27T18:00+01:00",
+              "endTime": "2023-09-27T20:00+01:00",
+              "description": "**About the course:**\nThis 8 weeks course will help you understand the basics of UX and master the design process with a user-centred approach. It has been designed to fully equip you with all the tools and methodologies you need to succeed as a UX Designer.\n\n**What you can expect:**\n✅ Working on Real-Client Projects\n✅ Free Mentorship on the way\n✅Working in small groups\n✅ Recognized Course Certificate\n\n**Y﻿ou will learn:**\n👉 UX Principles\n👉 User-Centred Design\n👉 Discovery Research and User Interviews\n👉 UX Principles Design Workshops and Mapping\n👉 ﻿Interaction Design, Wireframes and Prototyping\n👉 User Testing and Project Iteration\n\n**Meet our teachers:**\n**Orok Brooks** is a UX lead and business owner who boasts expertise in software across multiple industries, with 8 years of experience in the UX world from startups to large-scale organisations across the globe.\n**Natalia Veretenyk** is a digital product designer with a software and hardware background. Natalia has been honoured with the Adobe XD London award.\n\n**About UX Academy:**\nWe deliver live online hands-on training to help you take the next step in your career no matter what level you’re at. We are a leading provider of UX/UI Design Courses.\nOur students work on real client projects with globally recognized companies and we taught students from around the world from many companies.\n\n📌Check our payment plans:\n**[P﻿ayment Plans](https://myuxacademy.com/payment-plans/?utm_source=meetup)**\n📌Learn more about us by visiting our website:\n**[U﻿X Academy](https://myuxacademy.com/?utm_source=meetup)**\n📌F﻿ollow us on Social Media:\n**[L﻿inkedIn](https://www.linkedin.com/company/myuxacademy/?utm_source=meetup), [Facebook](https://www.facebook.com/myuxacademy?utm_source=meetup), [Instagram](https://www.instagram.com/myuxacademy/?utm_source=meetup), [Twitter](https://twitter.com/MyUXAcademy?utm_source=meetup)**",
+              "duration": "PT2H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515714054",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/6/e/6/highres_515714054.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "googleHangout",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/design-data-science/events/295213877",
+              "group": {
+                "id": "18616927",
+                "slug": "design-data-science",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Design & Data Science",
+                "urlname": "design-data-science",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/design-data-science",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "511685364",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/1/4/f/4/highres_511685364.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 81,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 81,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1965744548",
+                      "user": {
+                        "id": "379484215",
+                        "name": "Kat Komatovic",
+                        "memberPhoto": {
+                          "id": "313816724",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1965745744",
+                      "user": {
+                        "id": "328057531",
+                        "name": "Emilie Viard",
+                        "memberPhoto": {
+                          "id": "0",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1965745764",
+                      "user": {
+                        "id": "338767262",
+                        "name": "Nargess Ahmadi",
+                        "memberPhoto": {
+                          "id": "0",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "296280144",
+              "title": "Elementor Clinic",
+              "dateTime": "2023-09-27T18:00+01:00",
+              "endTime": "2023-09-27T20:00+01:00",
+              "description": "Tonight we will have two items on the agenda.\nThe first is a clinic for any issues, problems, challenges etc., that you have trying to build Elementor websites. We will try to answer them with our collective brain.\nThe second is a continuation of our original meetups - how to make a business out of Elementor.\n\nAs usual we will try to answer any questions as collaboratively as possible so that we can hear as many solutions as possible, and hopefully see them in action.\n\nIf you want a specific question answered then head over to our Whatsapp page where people are already dropping in their questions, or you can drop a question in here.\n\nWhatsapp Group - https://chat.whatsapp.com/CRSgFCl8Pxx1fANQbWbOMO",
+              "duration": "PT2H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "516043289",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/a/9/1/9/highres_516043289.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/elementor-uk-meetup-group/events/296280144",
+              "group": {
+                "id": "36777504",
+                "slug": "elementor-uk-meetup-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Elementor UK Meetup Group",
+                "urlname": "elementor-uk-meetup-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/elementor-uk-meetup-group",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "509821662",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/6/7/e/highres_509821662.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 17,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 17,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1971603993",
+                      "user": {
+                        "id": "287141212",
+                        "name": "Tonisha",
+                        "memberPhoto": {
+                          "id": "291181173",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971603994",
+                      "user": {
+                        "id": "305884782",
+                        "name": "Benny Placido",
+                        "memberPhoto": {
+                          "id": "298701675",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971608652",
+                      "user": {
+                        "id": "8342364",
+                        "name": "Avis  Boone",
+                        "memberPhoto": {
+                          "id": "268568632",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295899461",
+              "title": "WOULD YOU LIKE TO KNOW WHAT MAKES A COUPLE COMPATIBLE?",
+              "dateTime": "2023-09-27T18:00+01:00",
+              "endTime": "2023-09-27T19:00+01:00",
+              "description": "From what people tell me, some of them believe that compatibility has to do with having interests in common.\n\nOthers believe their partner should have certain specific qualities, such as kindness, a sense of humour, tolerance and good communication.\n\nHaving been in two long-term relationships – one very disappointing and the other, my current one, deeply fulfilling – I’ve come to realise that, while both are true to some extent, believe the answer is more complicated.\n\nTake a good sense of humour.\n\nWhat makes you laugh may leave your partner cold. What is really meant is a SHARED sense of humour.\n\nThe same applies to good communication.\n\nFor you, good communication may mean being able to share everything; for your partner, it may mean something entirely different.\n\nJoin us and find out more.\n\nIF YOU HAVE A PROBLEM GETTING IN, CALL JO ON 07956 568847",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515650795",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/2/a/2/b/highres_515650795.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/create-your-perfect-relationship-group/events/295899461",
+              "group": {
+                "id": "36364603",
+                "slug": "create-your-perfect-relationship-group",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Create Your Perfect Relationship Group",
+                "urlname": "create-your-perfect-relationship-group",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/create-your-perfect-relationship-group",
+                "city": "Richmond",
+                "state": "N7",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "507832814",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/c/e/4/e/highres_507832814.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 26,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 26,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969549477",
+                      "user": {
+                        "id": "39531012",
+                        "name": "Sue Plumtree",
+                        "memberPhoto": {
+                          "id": "310892646",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969551970",
+                      "user": {
+                        "id": "206129739",
+                        "name": "Debbie Howard",
+                        "memberPhoto": {
+                          "id": "259930441",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969554637",
+                      "user": {
+                        "id": "257541843",
+                        "name": "Tyra Maslin",
+                        "memberPhoto": {
+                          "id": "314318712",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295777624",
+              "title": "Introduction to NLP and coaching, leading to a certificated qualification",
+              "dateTime": "2023-09-27T18:00+01:00",
+              "endTime": "2023-09-27T20:30+01:00",
+              "description": "“I want to be a coach but…”\n“I want to learn how to do NLP but…”\n“I’d love to learn about myself and what makes me tick, but …”\nSound familiar? I hear this all the time, and the reasons are usually totally valid, such as:\n“I have family commitments”\n“I can’t take the time off work to do the course”\n“It’s too much information in a short space of time”\nThere are many more. I totally understand. In order for me to do all of my courses, I had to take annual leave (unpaid in some instances), travel long distances, pay for the course, bed and board, buy food, pay travel and concentrate for long, intense days. This is a huge commitment.\nHow would it be for you if you could bypass some of these obstacles? If you could undertake an internationally recognised NLP course in the comfort of your own home, and in small, achievable chunks?\nNLP is the lead tool in the coaching world. Coaching is an ever-growing profession, and in an era where people are asking more of themselves and often not knowing how to clear the obstacles, we need ways of navigating this territory.\nThe NLP Diploma is a gateway to the world of human psychology. It offers an introduction to a range of tools and strategies that can move you from a stuck to a more resourceful place.\nIts applications are endless! If you want to:\n· Set up a coaching business.\n· Add tools to your current profession.\n· Learn how to manage your own emotions, behaviours and drives.\n· Help others to overcome barriers to success.\n· Grow and nurture that zest for life.\nThen this is for you!\nIn small, bitesize chunks, I will walk you through the NLP Diploma programme, leading to an internationally recognised qualification from the world’s leading NLP organisation (INLPTA)\nFor just two and a half hours a week, for 12 weeks, you will learn a wealth of invaluable tools such as:\n· How we understand the world\n· How we process information\n· How you change unwanted behaviour\n· How to plan and undertake a coaching session\n· How to understand peoples’ outcomes and work towards them\n· How to develop linguistic mastery\n· How to develop and maintain trust and rapport\nAnd much more!\nThe first three sessions are FREE, so you can make your mind up about whether it is for you. If it is, then you will continue on a weekly basis for nine more sessions.\nOn completion of the course, you will obtain your qualification, and will also have accomplished the first four days of the practitioner programme, should you wish to continue on your NLP journey.",
+              "duration": "PT2H30M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515509248",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/c/0/6/0/highres_515509248.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/worthing-nlp-practice-group-meetup/events/295777624",
+              "group": {
+                "id": "31123914",
+                "slug": "worthing-nlp-practice-group-meetup",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Worthing NLP Practice Group Meetup",
+                "urlname": "worthing-nlp-practice-group-meetup",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/worthing-nlp-practice-group-meetup",
+                "city": "Worthing",
+                "state": "P6",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "478515660",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/d/2/c/highres_478515660.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 11,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 11,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1968896377",
+                      "user": {
+                        "id": "227394523",
+                        "name": "Iain Adenis",
+                        "memberPhoto": {
+                          "id": "266836981",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969159747",
+                      "user": {
+                        "id": "238564643",
+                        "name": "Lydia",
+                        "memberPhoto": {
+                          "id": "296172958",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1970052675",
+                      "user": {
+                        "id": "287531008",
+                        "name": "Vikki Adenis",
+                        "memberPhoto": {
+                          "id": "311286617",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_APPROVAL",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "294885486",
+              "title": "Dorothea Lange: Documenting Justice",
+              "dateTime": "2023-09-27T18:00+01:00",
+              "endTime": "2023-09-27T19:00+01:00",
+              "description": "Dorothea Lange is one of the most well-known photographers of the Great Depression. Her photographs documented the catastrophe of economic collapse while also emphasising empathy and community. Her art shone a light on the injustices of racism, poverty and inequality of the time. This talk will explore her Depression era photographs, giving them historical context and developing their political content.\n\n**Please, note:**\n\n* **You will be able to access the event with the Zoom link available for all registered guests here, on Meetup. However, if you want to stay in touch and receive informative emails from LEVEL, please, [sign-up](https://different-level.com/) for our Newsletter.**\n* **This event will be recorded. All participants will be able to rent and watch the video 2-3 days after the event through our [Vimeo profile](http://vimeo.com/differentlevel).**\n* **Our entire video collection is available free of charge for our members. We invite you to join our community, [become a member](https://different-level.com/become-a-member/) and enjoy multiple benefits as well!**",
+              "duration": "PT1H",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "514502015",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/7/d/f/highres_514502015.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/art-culture-level/events/294885486",
+              "group": {
+                "id": "34192102",
+                "slug": "art-culture-level",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "ART & CULTURE - LEVEL",
+                "urlname": "art-culture-level",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/art-culture-level",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "495845087",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/1/3/d/f/highres_495845087.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 19,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 19,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1963958172",
+                      "user": {
+                        "id": "315117335",
+                        "name": "Inna Didenko",
+                        "memberPhoto": {
+                          "id": "301125071",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1963963457",
+                      "user": {
+                        "id": "249818381",
+                        "name": "Beatrice Rix",
+                        "memberPhoto": {
+                          "id": "315068697",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1963963516",
+                      "user": {
+                        "id": "229949257",
+                        "name": "Angela",
+                        "memberPhoto": {
+                          "id": "267921989",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "289029942",
+              "title": "An Agile Coaches Guide to Showing your Value with Bob Galen",
+              "dateTime": "2023-09-27T18:15+01:00",
+              "endTime": "2023-09-27T20:00+01:00",
+              "description": "**Topic:**\nAn Agile Coaches Guide to Showing Your Value with Bob Galen\n\n**Synopsis:**\nSome of the biggest questions facing agile coaches today, whether external consultants/contractors or internal employees; Coaches, ScrumMasters, or leaders are:\n\n* What do you actually do as a coach?\n* What difference are you making? What is your value?\n* How do I measure your impact?\n* Why do I need you as my coach?\n* Do I really need your role in my organization?\n\n**Challenging questions to answer, right?**\n\nThe premise of this talk is that most coaches are fundamentally unprepared to answer them. That is,many of us struggle to communicate our value, while not appearing self-centered or braggadocios.\n\nIn this workshop we will explore how to effectively navigate these value-based questions. We’ll begin in the client entry process and discuss keys for setting up win-win coaching agreements and managing expectations. Next, we’ll explore a wide-variety of approaches for measure agile coaches, their value and their impact. While there is no singular metric, you’ll be exposed to many successful approaches.\nAnd finally, we’ll talk about the importance of brand building and not be shy or reticent in talking about you, which is a problem for so many coaches.\n\nWe’ll wrap things up with a Dojo session where we practice strategies for common, value-based situations, so you can leave with new ideas and skills and increased confidence.\n\n**Speaker:**\n**Bob Galen** is an Agile Practitioner, Trainer & Coach based in Cary, NC. In this role he helps guide companies and teams in their pragmatic adoption and organizational shift towards agile methods of working. Bob has been doing that since the late 1990s, so he’s deeply experienced.\n\nHe is the Director of Agile Practice at Zenergy Technologies, a leading business agility transformation company. Bob is also President and Head Coach at RGCG a boutique agile coaching firm.\n\nBob regularly speaks at international conferences and professional groups on topics related to agile software development, testing, scaling, and organizational leadership. He is a Certified Enterprise Coach (CEC), Scrum Alliance CAL trainer, and an active member of the Agile & Scrum Alliances.\n\nHe’s published four agile-centric books:\n\n* The Three Pillars of Agile Quality and Testing in 2015\n* Scrum Product Ownership, 3’rd Edition in 2019\n* Agile Reflections in 2012\n* Extraordinarily Badass Agile Coaching in 2022.\n\n**Sponsor:**\n**Agile Mastery Institute:** Because Mastery Matters.\n\n*AMI is breaking the paradigm of agile certification to offer agile professionals a real pathway towards mastery of their role built around the combination of classroom, coaching and community.*\nFind out more: [https://agilemasteryinstitute.com/](https://agilemasteryinstitute.com/)",
+              "duration": "PT1H45M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515176011",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/3/e/8/b/highres_515176011.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/agile-northants/events/289029942",
+              "group": {
+                "id": "19620199",
+                "slug": "agile-northants",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Agile Northants",
+                "urlname": "agile-northants",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/agile-northants",
+                "city": "Northampton",
+                "state": "J1",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "490467429",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/6/b/2/5/highres_490467429.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 266,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 266,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1931039694",
+                      "user": {
+                        "id": "152821162",
+                        "name": "Muhammad Meghji",
+                        "memberPhoto": {
+                          "id": "293364634",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1944438147",
+                      "user": {
+                        "id": "252456924",
+                        "name": "Imran Jamadar",
+                        "memberPhoto": {
+                          "id": "293540219",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1944986939",
+                      "user": {
+                        "id": "86943522",
+                        "name": "Mary Pieroszkiewicz",
+                        "memberPhoto": {
+                          "id": "313307527",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295958998",
+              "title": "Free English classes - online",
+              "dateTime": "2023-09-27T18:30+01:00",
+              "endTime": "2023-09-27T20:45+01:00",
+              "description": "\\- Native or native\\-like level speaker teachers\n\\- Improve your fluency\n\\- Meet new people and have fun\n\\- Understand a variety of different accents and English varieties\n\\- Increase your grammar and vocabulary knowledge\n\\- Learn real\\, authentic and natural English\n\\- Friendly\\, open and welcoming environment\n\\- Refugees and asylum seekers welcome\n\\- Improve your job prospects by improving your English level\\.\nClasses Monday and Wednesday evenings 18:30-20:45 online\nPre-intermediate (A1+/A2) and Upper-intermediate (B1+/B2) classes available\n\n**No Zoom link will be posted here - if you want to participate, please start by taking the level test!**\n\nComplete the level test to start the registration process - **[https://forms.gle/CZXAHL9w4WfsVdxk6](https://forms.gle/CZXAHL9w4WfsVdxk6)**",
+              "duration": "PT2H15M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "514658617",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/9/6/d/9/highres_514658617.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": null,
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/meetup-group-rexempwi/events/295958998",
+              "group": {
+                "id": "37181666",
+                "slug": "meetup-group-rexempwi",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Free English lessons",
+                "urlname": "meetup-group-rexempwi",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/meetup-group-rexempwi",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "f56b4a6f-e723-4e0d-8934-550e361a3074",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/event/",
+                  "source": null,
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 14,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 14,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969862080",
+                      "user": {
+                        "id": "397911755",
+                        "name": "Lizzy Adams",
+                        "memberPhoto": {
+                          "id": "316104483",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971223486",
+                      "user": {
+                        "id": "196738694",
+                        "name": "Alexia Dias",
+                        "memberPhoto": {
+                          "id": "252048899",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1971460372",
+                      "user": {
+                        "id": "315140392",
+                        "name": "Moris",
+                        "memberPhoto": {
+                          "id": "316032255",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          },
+          {
+            "node": {
+              "id": "295941108",
+              "title": "Scrum Event & Andrew Hunt (Agile Manifesto Author): Ending the Age of Misery",
+              "dateTime": "2023-09-27T18:45+01:00",
+              "endTime": "2023-09-27T20:15+01:00",
+              "description": "**Scrum Event & Andrew Hunt (Agile Manifesto Author) present: Ending the Age of Misery**\n\n**ABSTRACT:**\nThe number one problem with software development is thinking that there’s a number one problem.\n\nIn fact, there are so many unaddressed problems in software development organizations that instead of the Information Age, you might call this the *Age of Misery.*\n\nCompanies large and small fall prey to the joyless enshitification of their business models and users. Developers tire of endless ticketing systems, ponderous practices, and disconnected leadership.\n\nWouldn’t it be nice to actually get down to work and take comfort in reliable, consistent deliveries that delight the user community?\n\nThere’s no single answer, no single solution. But there is a small set of areas that you *can* address to end the *Age of Misery!*\n\n**ABOUT Andy Hunt:**\nAndy Hunt is a programmer turned consultant, author and publisher. He’s authored a dozen books, including the best-selling *“The Pragmatic Programmer,”* was one of the 17 authors of the Agile Manifesto and founders of the Agile Alliance, and co-founded the Pragmatic Bookshelf, publishing award-winning and critically acclaimed books for software developers.\n\nHe currently writes science fiction [(see conglommora.com)](https://conglommora.com/) and is experimenting with [The GROWS Method®.](https://growsmethod.com/)\n\n**AGENDA:**\n18:45 - 19:00 - Event Welcome & Networking\n19:00 - 20:00 - Talk\n20:00 - 20:15 - Event Questions & Networking\n20.15 - Event Ends\n\nSEU:\nAs a *\"Scrum Alliance* *User Group\"*, you will earn 1.5 SEUs from this event.",
+              "duration": "PT1H30M",
+              "timezone": "Europe/London",
+              "eventType": "ONLINE",
+              "currency": "USD",
+              "images": [
+                {
+                  "id": "515687946",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/b/b/4/a/highres_515687946.jpeg",
+                  "__typename": "Image"
+                }
+              ],
+              "venue": {
+                "id": "26906060",
+                "address": "",
+                "neighborhood": null,
+                "city": "",
+                "state": "",
+                "country": "",
+                "lat": -8.521147,
+                "lng": 179.1962,
+                "zoom": 15,
+                "name": "Online event",
+                "radius": 500,
+                "__typename": "Venue"
+              },
+              "onlineVenue": {
+                "type": "zoom",
+                "url": null,
+                "__typename": "OnlineVenue"
+              },
+              "isSaved": false,
+              "eventUrl": "https://www.meetup.com/scrumevent/events/295941108",
+              "group": {
+                "id": "20237710",
+                "slug": "ScrumEvent",
+                "isPrivate": false,
+                "isOrganizer": false,
+                "isNewGroup": false,
+                "name": "Scrum Event",
+                "urlname": "ScrumEvent",
+                "timezone": "Europe/London",
+                "link": "https://www.meetup.com/scrumevent",
+                "city": "London",
+                "state": "17",
+                "country": "gb",
+                "groupPhoto": {
+                  "id": "470718783",
+                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+                  "source": "https://secure.meetupstatic.com/photos/event/4/9/5/f/highres_470718783.jpeg",
+                  "__typename": "Image"
+                },
+                "__typename": "Group"
+              },
+              "going": 242,
+              "maxTickets": 0,
+              "tickets": {
+                "count": 242,
+                "edges": [
+                  {
+                    "node": {
+                      "id": "1969771712",
+                      "user": {
+                        "id": "151016832",
+                        "name": "John Barratt",
+                        "memberPhoto": {
+                          "id": "313843319",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969771713",
+                      "user": {
+                        "id": "14157974",
+                        "name": "Paulo Dias",
+                        "memberPhoto": {
+                          "id": "282629460",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  },
+                  {
+                    "node": {
+                      "id": "1969771714",
+                      "user": {
+                        "id": "45940632",
+                        "name": "Raquel Silva",
+                        "memberPhoto": {
+                          "id": "300031918",
+                          "baseUrl": "https://secure-content.meetupstatic.com/images/classic-member/",
+                          "source": null,
+                          "__typename": "Image"
+                        },
+                        "__typename": "User"
+                      },
+                      "__typename": "Ticket"
+                    },
+                    "__typename": "EventTicketsEdge"
+                  }
+                ],
+                "__typename": "EventTicketsConnection"
+              },
+              "isAttending": false,
+              "rsvpState": "JOIN_OPEN",
+              "__typename": "Event",
+              "isNewGroup": false,
+              "covidPrecautions": {
+                "venueType": null,
+                "__typename": "CovidPrecautions"
+              }
+            },
+            "recommendationId": "f45bd238-4d72-40c4-9303-dbb5fdf873d9",
+            "recommendationSource": "ml-popular-events-nearby",
+            "__typename": "RankedEventsResultEdge"
+          }
+        ],
+        "__typename": "RankedEventsConnection"
+      }
+    }
+  }

@@ -6,3 +6,5 @@ prettytable
 humanize
 tzlocal
 pre-commit
+pytest
+pytest-cov
