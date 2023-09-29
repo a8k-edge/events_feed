@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "hits": [
+        {
+          "url": "https://reactalicante.es",
+          "id": 18476,
+          "uuid": "nwly34pZYzhtCjblCQkSHMY1UeU=",
+          "name": "React Alicante",
+          "city": "Alicante",
+          "country": "Spain",
+          "startDate": "2023-09-28",
+          "endDate": "2023-09-30",
+          "twitter": "@ReactAlicante",
+          "affiliateUrl": null,
+          "affiliateText": null,
+          "offersSignLanguageOrCC": false,
+          "online": true,
+          "mastodon": null,
+          "topics": [
+            "graphql",
+            "typescript",
+            "javascript"
+          ],
+          "objectID": "nwly34pZYzhtCjblCQkSHMY1UeU=",
+          "_highlightResult": {
+            "name": {
+              "value": "React Alicante",
+              "matchLevel": "none",
+              "matchedWords": []
+            },
+            "city": {
+              "value": "Alicante",
+              "matchLevel": "none",
+              "matchedWords": []
+            },
+            "country": {
+              "value": "Spain",
+              "matchLevel": "none",
+              "matchedWords": []
+            },
+            "startDate": {
+              "value": "2023-09-28",
+              "matchLevel": "none",
+              "matchedWords": []
+            },
+            "topics": [
+              {
+                "value": "graphql",
+                "matchLevel": "none",
+                "matchedWords": []
+              },
+              {
+                "value": "typescript",
+                "matchLevel": "none",
+                "matchedWords": []
+              },
+              {
+                "value": "javascript",
+                "matchLevel": "none",
+                "matchedWords": []
+              }
+            ],
+            "continent": {
+              "value": "Europe",
+              "matchLevel": "none",
+              "matchedWords": []
+            }
+          }
+        }
+      ],
+      "nbHits": 220,
+      "page": 0
+    }
+  ]
+}

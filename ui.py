@@ -53,7 +53,7 @@ def app() -> None:
 
         # target and noreferrer automatically added
         df_events['event_url'] = df_events['event_url'].apply(lambda x: f'<a href="{x}">🔗</a>')
-        df_events = df_events[['title', 'start_time', 'going', 'event_url']]
+        df_events = df_events[['title', 'start_time', 'end_time', 'going', 'event_url']]
 
         st.text(f"Total events: {len(events)}")
         st.text(f"Filtered events: {len(df_events)}")

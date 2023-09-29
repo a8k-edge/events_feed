@@ -1,11 +1,13 @@
 import logging
 import secrets
+import time
 from collections.abc import Collection
 from datetime import datetime
 from datetime import timedelta
 from typing import Any
 from typing import Final
 from typing import NamedTuple
+from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 import requests
@@ -13,6 +15,7 @@ import requests
 
 EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
 MEETUP_URL = 'https://www.meetup.com/gql'
+CONF_TECH_URL = 'https://29flvjv5x9-dsn.algolia.net/1/indexes/*/queries'
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -256,3 +259,50 @@ class MeetupService:
             **UA_HINTS,
             'x-meetup-view-id': 'efea661b-5526-4445-855e-e24425510b83',
         }
+
+
+class ConfTechService:
+    """
+        https://confs.tech/
+
+        Use algolia as backend.
+        POST {Application-ID}.algolia.net/1/indexes/*/queries?GET_PARAMS
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        response = requests.post(
+            f"{CONF_TECH_URL}?{self.get_query()}",
+            headers=self.get_headers(),
+            data=self.get_data(),
+        )
+        data = response.json()
+        return data['results'][0]['hits']
+
+    def get_query(self) -> str:
+        get_params = {
+            'x-algolia-agent': [(
+                'Algolia for JavaScript (4.18.0); Browser (lite); JS Helper (3.13.3); '
+                'react (17.0.2); react-instantsearch (6.40.1)'
+            )],
+            'x-algolia-api-key': ['f2534ea79a28d8469f4e81d546297d39'],
+            'x-algolia-application-id': ['29FLVJV5X9'],
+        }
+        return urlencode(get_params, doseq=True)
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'Accept': '*/*',
+            'Accept-Language': 'en-US,en',
+            'Connection': 'keep-alive',
+            'Origin': 'https://confs.tech',
+            'Referer': 'https://confs.tech/',
+            'content-type': 'application/x-www-form-urlencoded',
+            **UA_HINTS,
+        }
+
+    def get_data(self) -> str:
+        return (
+            '{"requests":[{"indexName":"prod_conferences","params":"facetFilters=%5B%5B%22topics%3Adevops%22%5D%5D&facets=%5B%22topics%22%2C%22continent%22%2C%22country%22%2C%22offersSignLanguageOrCC%22%5D&filters=startDateUnix%3E1695754192&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=600&maxValuesPerFacet=100&page=0&query=&tagFilters="},{"indexName":"prod_conferences","params":"analytics=false&clickAnalytics=false&facets=topics&filters='  # noqa: E501
+            f'startDateUnix%3E{time.time()}'
+            '&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=0&maxValuesPerFacet=100&page=0&query="}]}'  # noqa: E501
+        )

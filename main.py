@@ -9,6 +9,7 @@ from typing import Any
 
 from prettytable import PrettyTable
 
+from client import ConfTechService
 from client import MeetupService
 
 
@@ -27,8 +28,9 @@ logging.basicConfig(
 def main(delta_days: int = 3) -> None:
     # eb_events = EventbriteService().fetch_events(delta_days)
     meetup_events = MeetupService().fetch_events(delta_days)
+    conf_tech_events = ConfTechService().fetch_events()
 
-    events = transform_events(meetup_events)
+    events = transform_events(meetup_events, conf_tech_events)
     DataManager.save_data(events)
 
 
@@ -46,14 +48,14 @@ def transform_to_unified_schema(input_dict: dict[str, Collection[str]]) -> dict[
     schema_map = {
         "id": ["id"],
         "title": ["title", "name"],
-        "start_time": ["dateTime", "start_date+'T'+start_time"],
+        "start_time": ["dateTime", "start_date+'T'+start_time", "startDate"],
         "end_time": ["endTime", "end_date+'T'+end_time"],
         "timezone": ["timezone"],
         "going": ["going"],
         "description": ["description", "summary"],
         "event_url": ["eventUrl", "url"],
         "image_url": ["group.groupPhoto.source", "image.original.url"],
-        "is_online_event": ["onlineVenue", "is_online_event"],
+        "is_online_event": ["onlineVenue", "is_online_event", "online"],
     }
 
     output_dict = {}
