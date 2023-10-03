@@ -3,6 +3,7 @@
 
 data/
 logs/
+process_id.txt
 
 *.log
 result.json

@@ -8,3 +8,4 @@ tzlocal
 pre-commit
 pytest
 pytest-cov
+pytz

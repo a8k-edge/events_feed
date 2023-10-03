@@ -5,6 +5,7 @@ import os
 import sys
 from collections.abc import Collection
 from datetime import datetime
+from enum import Enum
 from typing import Any
 
 from prettytable import PrettyTable
@@ -25,26 +26,40 @@ logging.basicConfig(
 )
 
 
+class Source(Enum):
+    EVENTBRITE = "Eventbrite"
+    MEETUP = "Meetup"
+    CONFTECH = "ConfTech"
+    GCD = "GCD"
+
+
 def main(delta_days: int = 3) -> None:
     # eb_events = EventbriteService().fetch_events(delta_days)
     meetup_events = MeetupService().fetch_events(delta_days)
     conf_tech_events = ConfTechService().fetch_events()
 
-    events = transform_events(meetup_events, conf_tech_events)
+    events = transform_events(
+        # (Source.EVENTBRITE.name, eb_events),
+        (Source.MEETUP.name, meetup_events),
+        (Source.CONFTECH.name, conf_tech_events),
+    )
     DataManager.save_data(events)
 
 
 def transform_events(
-    *event_groups: list[dict[str, Collection[str]]]
+    *event_groups: tuple[str, list[dict[str, Collection[str]]]]
 ) -> list[dict[str, str | None]]:
     transformed_events = []
-    for events in event_groups:
+    for source, events in event_groups:
         for event in events:
-            transformed_events.append(transform_to_unified_schema(event))
+            transformed_events.append(transform_to_unified_schema(event, source))
     return transformed_events
 
 
-def transform_to_unified_schema(input_dict: dict[str, Collection[str]]) -> dict[str, str | None]:
+def transform_to_unified_schema(
+    input_dict: dict[str, Collection[str]],
+    source: str,
+) -> dict[str, str | None]:
     schema_map = {
         "id": ["id"],
         "title": ["title", "name"],
@@ -58,7 +73,8 @@ def transform_to_unified_schema(input_dict: dict[str, Collection[str]]) -> dict[
         "is_online_event": ["onlineVenue", "is_online_event", "online"],
     }
 
-    output_dict = {}
+    output_dict: dict[str, str | None] = {}
+    output_dict["source"] = source
     for unified_key, original_keys in schema_map.items():
         values = []
         for key in original_keys:
