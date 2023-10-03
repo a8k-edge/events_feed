@@ -6,19 +6,12 @@ import sys
 from collections.abc import Collection
 from datetime import datetime
 from enum import Enum
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import List
-from typing import Union
+from typing import Any, Callable, Dict, List, Union
 
 import jmespath
 from prettytable import PrettyTable
 
-from client import ConfTechService
-from client import GDGService
-from client import MeetupService
-
+from services import ConfTechService, GDGService, MeetupService
 
 Transformer = Union[str, Callable]
 
@@ -61,7 +54,7 @@ def main(delta_days: int = 3) -> None:
 
 
 def transform_events(
-    *event_groups: tuple[str, list[dict[str, Collection[str]]]]
+    *event_groups: tuple[str, list[dict[str, Collection[str]]]],
 ) -> list[dict[str, str | None]]:
     schema_map: Dict[str, List[Transformer]] = {
         "id": ["id"],

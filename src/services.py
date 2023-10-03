@@ -2,17 +2,12 @@ import logging
 import secrets
 import time
 from collections.abc import Collection
-from datetime import datetime
-from datetime import timedelta
-from datetime import timezone
-from typing import Any
-from typing import Final
-from typing import NamedTuple
+from datetime import datetime, timedelta, timezone
+from typing import Any, Final, NamedTuple
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 import requests
-
 
 EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
 MEETUP_URL = 'https://www.meetup.com/gql'
@@ -44,33 +39,27 @@ class Location(NamedTuple):
 # Relevant hardcoded location from meetup.com
 LOCATIONS: Final = [
     Location(name="USA", lat=37.0902, lon=-95.7129, radius=1200),
-    # Location(name="Canada", lat=43.6532, lon=-79.3832, radius=200),
-    # Location(name="Austria", lat=48.2082, lon=16.3738, radius=50),
+    Location(name="Canada", lat=43.6532, lon=-79.3832, radius=200),
+    Location(name="Austria", lat=48.2082, lon=16.3738, radius=50),
     Location(name="Australia", lat=-37.8136, lon=144.9631, radius=1000),
     Location(name="United Kingdom", lat=51.5072, lon=0.1276, radius=100),
     Location(name="Italy", lat=45.4642, lon=9.19, radius=50),
     Location(name="Finland", lat=60.1699, lon=24.9384, radius=250),
     Location(name="Denmark", lat=55.6761, lon=12.5683, radius=75),
-    # Location(name="China", lat=31.2304, lon=121.4737, radius=1000),
     Location(name="Brazil", lat=-23.5558, lon=-46.6396, radius=1000),
-    # Location(name="Belgium", lat=50.8476, lon=4.3572, radius=50),
     Location(name="Netherlands", lat=52.103207, lon=5.608742, radius=50),
     Location(name="Singapore", lat=1.355184, lon=103.819524, radius=20),
-    # Location(name="Kenya", lat=0.659799, lon=37.884, radius=200),
     Location(name="Israel", lat=32.0853, lon=34.7818, radius=200),
-    # Location(name="Ireland", lat=53.3498, lon=-6.2603, radius=200),
-    # Location(name="India", lat=21.99029, lon=78.651019, radius=750),
+    Location(name="Ireland", lat=53.3498, lon=-6.2603, radius=200),
     Location(name="Hong Kong", lat=22.3193, lon=114.1694, radius=20),
-    # Location(name="Greece", lat=37.9838, lon=23.7275, radius=150),
+    Location(name="Greece", lat=37.9838, lon=23.7275, radius=150),
     Location(name="Germany", lat=52.52, lon=13.405, radius=100),
-    # Location(name="France", lat=48.8566, lon=2.3522, radius=250),
-    # Location(name="UAE", lat=25.2048, lon=55.2708, radius=100),
+    Location(name="France", lat=48.8566, lon=2.3522, radius=250),
     Location(name="Switzerland", lat=47.3769, lon=8.5417, radius=50),
-    # Location(name="Sweden", lat=63.441294, lon=16.578449, radius=400),
-    # Location(name="Spain", lat=41.3874, lon=2.1686, radius=200),
+    Location(name="Sweden", lat=63.441294, lon=16.578449, radius=400),
+    Location(name="Spain", lat=41.3874, lon=2.1686, radius=200),
     Location(name="South Africa", lat=-29.792839, lon=24.76505, radius=400),
     Location(name="Norway", lat=61.02041, lon=8.784942, radius=500),
-    # Location(name="Nigeria", lat=8.811187, lon=8.094624, radius=400),
     Location(name="New Zealand", lat=-42.288765, lon=173.190186, radius=300),
 ]
 
@@ -81,7 +70,7 @@ class EventbriteService:
         page = 1
         has_next_page = True
         events = []
-        token = self.generate_token()
+        token = secrets.token_bytes(16).hex()
         page_count = -1
 
         while has_next_page and page < EB_THRESHOLD:
@@ -111,9 +100,6 @@ class EventbriteService:
             logging.info(f"[FAILED] EB fetched {page=}")
             logging.error(exc, exc_info=True)
             raise
-
-    def generate_token(self) -> str:
-        return secrets.token_bytes(16).hex()
 
     def get_cookies(self, token: str) -> dict[str, str]:
         assert len(token) == 32
@@ -211,7 +197,7 @@ class MeetupService:
                 unique_data.append(item)
         return unique_data
 
-    def _fetch_page(self, delta_days: int, location: Any, cursor: str) -> tuple[bool, Any]:
+    def _fetch_page(self, delta_days: int, location: Location, cursor: str) -> tuple[bool, Any]:
         try:
             response = requests.post(
                 MEETUP_URL,
@@ -231,7 +217,7 @@ class MeetupService:
         *,
         location: 'Location',
         cursor: str,
-        delta_days: int
+        delta_days: int,
     ) -> dict[str, Collection[str]]:
         tz = ZoneInfo('US/Eastern')
         start_date = datetime.now(tz)

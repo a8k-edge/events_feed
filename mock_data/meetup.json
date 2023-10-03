@@ -19,14 +19,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515895323",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/3/b/d/b/highres_515895323.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -155,14 +147,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "502225870",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/6/5/0/e/highres_502225870.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -291,14 +275,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "514821462",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/5/3/d/6/highres_514821462.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -427,14 +403,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515912793",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/8/0/1/9/highres_515912793.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -563,14 +531,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515993948",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/d/2/b/c/highres_515993948.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -699,14 +659,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515653497",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/3/4/b/9/highres_515653497.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -835,14 +787,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515696429",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/d/c/6/d/highres_515696429.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -967,14 +911,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515626001",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/b/3/b/1/highres_515626001.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1103,7 +1039,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1232,14 +1167,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515984595",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/a/e/3/3/highres_515984595.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1368,14 +1295,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515548305",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/6/e/9/1/highres_515548305.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1504,14 +1423,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515714054",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/3/6/e/6/highres_515714054.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1640,14 +1551,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "516043289",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/a/9/1/9/highres_516043289.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1776,14 +1679,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515650795",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/2/a/2/b/highres_515650795.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -1912,14 +1807,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515509248",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/c/0/6/0/highres_515509248.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -2048,14 +1935,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "514502015",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/7/d/f/highres_514502015.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -2184,14 +2063,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515176011",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/3/e/8/b/highres_515176011.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -2320,14 +2191,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "514658617",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/9/6/d/9/highres_514658617.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
@@ -2452,14 +2315,6 @@
               "timezone": "Europe/London",
               "eventType": "ONLINE",
               "currency": "USD",
-              "images": [
-                {
-                  "id": "515687946",
-                  "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
-                  "source": "https://secure.meetupstatic.com/photos/event/b/b/4/a/highres_515687946.jpeg",
-                  "__typename": "Image"
-                }
-              ],
               "venue": {
                 "id": "26906060",
                 "address": "",
