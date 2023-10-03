@@ -9,6 +9,8 @@ import requests
 from client import CONF_TECH_URL
 from client import ConfTechService
 from client import EVENTBRITE_URL
+from client import GDG_URL
+from client import GDGService
 from client import LOCATIONS
 from client import MEETUP_URL
 from client import MeetupService
@@ -21,6 +23,7 @@ URL_MAPPINGS = {
     EVENTBRITE_URL: "eventbrite.json",
     MEETUP_URL: "meetup.json",
     CONF_TECH_URL: "conf_tech.json",
+    GDG_URL: "gdg.json",
 }
 
 
@@ -51,6 +54,7 @@ class MockResponse:
 
 def test_main_integration(monkeypatch):
     monkeypatch.setattr(requests, "post", mock_requests_post)
+    monkeypatch.setattr(requests, "get", mock_requests_post)
     main()
 
     saved_data = DataManager.load_latest_data()
@@ -77,6 +81,22 @@ def test_conf_tech_mock_integration(monkeypatch):
     actual_data = ConfTechService().fetch_events()
     monkeypatch.setattr(requests, "post", mock_requests_post)
     mock_data = ConfTechService().fetch_events()
+
+    actual_schema = extract_schema(actual_data)
+    mock_schema = extract_schema(mock_data)
+
+    # with open('logs\\actual_schema.json', 'w', encoding='utf-8') as f:
+    #     json.dump(extract_schema(actual_data), f, indent=4)
+    # with open('logs\\mock_schema.json', 'w', encoding='utf-8') as f:
+    #     json.dump(extract_schema(mock_data), f, indent=4)
+    assert contains_key_values(actual_schema, mock_schema)
+
+
+@pytest.mark.skip
+def test_gdg_mock_integration(monkeypatch):
+    actual_data = GDGService().fetch_events()
+    monkeypatch.setattr(requests, "get", mock_requests_post)
+    mock_data = GDGService().fetch_events()
 
     actual_schema = extract_schema(actual_data)
     mock_schema = extract_schema(mock_data)

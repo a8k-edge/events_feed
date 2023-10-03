@@ -11,6 +11,7 @@ from tzlocal import get_localzone
 
 from main import DataManager
 from main import main
+from main import Source
 
 
 LOCAL_TZ: Final = get_localzone()
@@ -45,7 +46,7 @@ def app() -> None:
     st.divider()
 
     if data:
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             sort_option = st.selectbox(
                 "Sort by:",
@@ -53,17 +54,25 @@ def app() -> None:
             )
         with col2:
             min_going = st.number_input('Filter by minimum Going', value=10)
+        with col3:  # Source selector in the third column
+            selected_sources = st.multiselect(
+                "Select sources:",
+                options=[source.value for source in Source],
+            )
 
         df_events = pd.DataFrame(data['events'])
         df_events['going'] = pd.to_numeric(df_events['going'], errors='coerce', downcast='integer')
         df_events['start_time'] = pd.to_datetime(df_events['start_time'], utc=True)
         df_events['end_time'] = pd.to_datetime(df_events['end_time'], utc=True)
 
+        # Filter & Sort
+        if selected_sources:
+            df_events = df_events[df_events['source'].isin(selected_sources)]
+        df_events = df_events[df_events['going'].ge(min_going) | df_events['going'].isnull()]
         if sort_option == "Start time (Latest first)":
             df_events = df_events.sort_values(by='start_time')
         elif sort_option == "Going (Largest first)":
             df_events = df_events.sort_values(by='going', ascending=False)
-        df_events = df_events[df_events['going'].ge(min_going) | df_events['going'].isnull()]
 
         # Format
         df_events['start_time'] = df_events['start_time'].dt.tz_convert(pytz.timezone('EET'))
@@ -76,7 +85,7 @@ def app() -> None:
             lambda x: f'<div><a href="{x["event_url"]}">{x["title"]}</a></div>',
             axis=1,
         )
-        df_events['source'] = df_events['source'].apply(str.title)
+        # df_events['source'] = df_events['source'].apply(str.title)
 
         # Style
         df_events = df_events[['start_time', 'title', 'end_time', 'going', 'source']]

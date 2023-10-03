@@ -4,6 +4,7 @@ import time
 from collections.abc import Collection
 from datetime import datetime
 from datetime import timedelta
+from datetime import timezone
 from typing import Any
 from typing import Final
 from typing import NamedTuple
@@ -16,6 +17,7 @@ import requests
 EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
 MEETUP_URL = 'https://www.meetup.com/gql'
 CONF_TECH_URL = 'https://29flvjv5x9-dsn.algolia.net/1/indexes/*/queries'
+GDG_URL = 'https://gdg.community.dev/api/event/'
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -200,7 +202,14 @@ class MeetupService:
                     page += 1
 
         logging.info("Finished fetching Meetup events")
-        return events
+        seen_ids = set()
+        unique_data = []
+
+        for item in events:
+            if item['id'] not in seen_ids:
+                seen_ids.add(item['id'])
+                unique_data.append(item)
+        return unique_data
 
     def _fetch_page(self, delta_days: int, location: Any, cursor: str) -> tuple[bool, Any]:
         try:
@@ -306,3 +315,39 @@ class ConfTechService:
             f'startDateUnix%3E{time.time()}'
             '&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=0&maxValuesPerFacet=100&page=0&query="}]}'  # noqa: E501
         )
+
+
+class GDGService:
+    """
+        https://gdg.community.dev/events/#/calendar
+        https://gdg.community.dev/api/event/?QUERY_PARAMS
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching GDG Events")
+        start_date = datetime.now() - timedelta(days=31)
+        end_date = datetime.now() + timedelta(days=31)
+        params = {
+            "fields": (
+                "id,chapter,event_type,event_type_title,title,status,"
+                "start_date,end_date,start_date_naive,end_date_naive,url"
+            ),
+            "start_date": start_date.strftime('%Y-%m-%d'),
+            "end_date": end_date.strftime('%Y-%m-%d'),
+        }
+        response = requests.get(GDG_URL, params=params)
+        return [
+            item
+            for item in response.json()['results']
+            if datetime.fromisoformat(item["end_date"]).date() >= datetime.now(timezone.utc).date()
+        ]
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'gdg.community.dev',
+            'accept': 'application/json; version=bevy.1.0',
+            'accept-language': 'en',
+            'content-type': 'application/json',
+            'referer': 'https://gdg.community.dev/events/',
+            **UA_HINTS,
+        }

@@ -7,23 +7,33 @@ from collections.abc import Collection
 from datetime import datetime
 from enum import Enum
 from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Union
 
+import jmespath
 from prettytable import PrettyTable
 
 from client import ConfTechService
+from client import GDGService
 from client import MeetupService
 
 
-os.makedirs('logs', exist_ok=True)
-logfile = os.path.join('logs', f'logs_{datetime.now():%Y-%m-%d_%H.%M}.log')
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(logfile),
-        logging.StreamHandler(sys.stdout),
-    ],
-)
+Transformer = Union[str, Callable]
+
+
+def setup_logging():
+    os.makedirs('logs', exist_ok=True)
+    logfile = os.path.join('logs', f'logs_{datetime.now():%Y-%m-%d_%H.%M}.log')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(logfile),
+            logging.StreamHandler(sys.stdout),
+        ],
+    )
 
 
 class Source(Enum):
@@ -34,14 +44,18 @@ class Source(Enum):
 
 
 def main(delta_days: int = 3) -> None:
+    setup_logging()
+
     # eb_events = EventbriteService().fetch_events(delta_days)
     meetup_events = MeetupService().fetch_events(delta_days)
+    gdg_events = GDGService().fetch_events()
     conf_tech_events = ConfTechService().fetch_events()
 
     events = transform_events(
-        # (Source.EVENTBRITE.name, eb_events),
-        (Source.MEETUP.name, meetup_events),
-        (Source.CONFTECH.name, conf_tech_events),
+        # (Source.EVENTBRITE.value, eb_events),
+        (Source.GCD.value, gdg_events),
+        (Source.MEETUP.value, meetup_events),
+        (Source.CONFTECH.value, conf_tech_events),
     )
     DataManager.save_data(events)
 
@@ -49,77 +63,78 @@ def main(delta_days: int = 3) -> None:
 def transform_events(
     *event_groups: tuple[str, list[dict[str, Collection[str]]]]
 ) -> list[dict[str, str | None]]:
+    schema_map: Dict[str, List[Transformer]] = {
+        "id": ["id"],
+        "title": ["title", "name"],
+        "start_time": [
+            "dateTime",
+            # gcd start_time handle
+            lambda d: None if 'start_time' in d else get_value(d, 'start_date'),
+            "start_date+'T'+start_time",
+            "startDate",
+        ],
+        "end_time": [
+            "endTime",
+            # gcd end_time handle
+            lambda d: None if 'end_time' in d else get_value(d, 'end_date'),
+            "end_date+'T'+end_time",
+        ],
+        "timezone": ["timezone"],
+        "going": ["going"],
+        "description": ["description", "summary", "event_type_title+'\n'+chapter.description"],
+        "event_url": ["eventUrl", "url"],
+        "image_url": ["group.groupPhoto.source", "image.original.url"],
+        "is_online_event": ["onlineVenue", "is_online_event", "online", "event_type"],
+    }
     transformed_events = []
     for source, events in event_groups:
         for event in events:
-            transformed_events.append(transform_to_unified_schema(event, source))
+            transformed_events.append(transform_to_unified_schema(event, source, schema_map))
     return transformed_events
 
 
 def transform_to_unified_schema(
-    input_dict: dict[str, Collection[str]],
+    input_dict: Dict[str, Any],
     source: str,
-) -> dict[str, str | None]:
-    schema_map = {
-        "id": ["id"],
-        "title": ["title", "name"],
-        "start_time": ["dateTime", "start_date+'T'+start_time", "startDate"],
-        "end_time": ["endTime", "end_date+'T'+end_time"],
-        "timezone": ["timezone"],
-        "going": ["going"],
-        "description": ["description", "summary"],
-        "event_url": ["eventUrl", "url"],
-        "image_url": ["group.groupPhoto.source", "image.original.url"],
-        "is_online_event": ["onlineVenue", "is_online_event", "online"],
-    }
+    schema_map: Dict[str, List[Transformer]],
+) -> Dict[str, Any]:
+    output_dict = {"source": source}
 
-    output_dict: dict[str, str | None] = {}
-    output_dict["source"] = source
-    for unified_key, original_keys in schema_map.items():
+    for unified_key, transformers in schema_map.items():
         values = []
-        for key in original_keys:
-            value = get_value(input_dict, key)
+        for transformer in transformers:
+            if callable(transformer):
+                value = transformer(input_dict)
+            else:
+                value = get_value(input_dict, transformer)
+            if value == "T":
+                continue
             if value is not None:
                 values.append(value)
-        # if input_dict has several keys from a list map
-        try:
-            assert len(values) <= 1, values
-        except AssertionError:
-            logging.error(f"{values=} {original_keys=} {input_dict}")
-            raise
+
+        # if len(values) > 1:
+        #     logging.error(f"Multiple values found: {values=}, {transformers=}, {input_dict=}")
+        #     raise ValueError(f"Multiple matching keys found {unified_key=}.")
+
         output_dict[unified_key] = values[0] if values else None
 
     return output_dict
 
 
-def get_value(input_dict: dict[str, Collection[str]], key: str) -> str | None:
-    # If '+' in key, handle it as a concatenation of tokens
-    if '+' in key:
-        tokens = key.split('+')
+def get_value(input_dict: dict[str, Any], query: str) -> Any:
+    if '+' in query:
+        tokens = query.split('+')
         values = [
-            get_value_from_key(input_dict, token.strip())
+            jmespath.search(token.strip(), input_dict)
             if token[0] not in ["'", '"']
             else token[1:-1]
             for token in tokens
         ]
-        if None in values:
+        if len(tokens) != len(values):
             return None
-        else:
-            # getting type error as values may include None
-            return ''.join(values)  # type: ignore
+        return ''.join([v for v in values if v])
     else:
-        return get_value_from_key(input_dict, key.strip())
-
-
-def get_value_from_key(input_dict: dict[str, Collection[str]], key: str) -> Any | None:
-    keys = key.split('.')
-    current_dict = input_dict
-    for k in keys:
-        if isinstance(current_dict, dict):
-            current_dict = current_dict.get(k)  # type: ignore
-        else:
-            return None
-    return current_dict
+        return jmespath.search(query.strip(), input_dict)
 
 
 class DataManager:
