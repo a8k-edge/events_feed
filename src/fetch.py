@@ -11,7 +11,8 @@ from typing import Any, Callable, Dict, List, Union
 import jmespath
 from prettytable import PrettyTable
 
-from services import ConfTechService, GDGService, MeetupService
+from services import (C2CGlobalService, ConfTechService, GDGService,
+                      MeetupService)
 
 Transformer = Union[str, Callable]
 
@@ -34,6 +35,7 @@ class Source(Enum):
     MEETUP = "Meetup"
     CONFTECH = "ConfTech"
     GCD = "GCD"
+    C2CGLOBAL = "C2C Global"
 
 
 def main(delta_days: int = 3) -> None:
@@ -43,12 +45,14 @@ def main(delta_days: int = 3) -> None:
     meetup_events = MeetupService().fetch_events(delta_days)
     gdg_events = GDGService().fetch_events()
     conf_tech_events = ConfTechService().fetch_events()
+    c2c_global_events = C2CGlobalService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
         (Source.GCD.value, gdg_events),
         (Source.MEETUP.value, meetup_events),
         (Source.CONFTECH.value, conf_tech_events),
+        (Source.C2CGLOBAL.value, c2c_global_events),
     )
     DataManager.save_data(events)
 

@@ -13,6 +13,7 @@ EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
 MEETUP_URL = 'https://www.meetup.com/gql'
 CONF_TECH_URL = 'https://29flvjv5x9-dsn.algolia.net/1/indexes/*/queries'
 GDG_URL = 'https://gdg.community.dev/api/event/'
+C2CGLOBAL_URL = 'https://events.c2cglobal.com/api/search/'
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -67,6 +68,7 @@ LOCATIONS: Final = [
 class EventbriteService:
 
     def fetch_events(self, delta_days: int) -> list[dict[str, Any]]:
+        logging.info("Fetching Eventbrite Events")
         page = 1
         has_next_page = True
         events = []
@@ -169,6 +171,7 @@ class EventbriteService:
 class MeetupService:
 
     def fetch_events(self, delta_days: int) -> list[dict[str, Any]]:
+        logging.info("Fetching Meetup Events")
         events = []
         location_len = len(LOCATIONS)
 
@@ -212,13 +215,11 @@ class MeetupService:
             logging.error(exc, exc_info=True)
             raise
 
-    def get_json(
-        self,
-        *,
-        location: 'Location',
-        cursor: str,
-        delta_days: int,
-    ) -> dict[str, Collection[str]]:
+    def get_json(self,
+                 *,
+                 location: 'Location',
+                 cursor: str,
+                 delta_days: int) -> dict[str, Collection[str]]:
         tz = ZoneInfo('US/Eastern')
         start_date = datetime.now(tz)
         end_date = start_date + timedelta(days=delta_days)
@@ -265,6 +266,7 @@ class ConfTechService:
     """
 
     def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Conf Tech Events")
         response = requests.post(
             f"{CONF_TECH_URL}?{self.get_query()}",
             headers=self.get_headers(),
@@ -335,5 +337,30 @@ class GDGService:
             'accept-language': 'en',
             'content-type': 'application/json',
             'referer': 'https://gdg.community.dev/events/',
+            **UA_HINTS,
+        }
+
+
+class C2CGlobalService:
+    """
+        https://events.c2cglobal.com/events/#/list
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching C2C Global Events")
+        params = {
+            'result_types': 'upcoming_event',
+            'country_code': 'Earth',
+        }
+        response = requests.get(C2CGLOBAL_URL, params=params, headers=self.get_headers())
+        return response.json()['results']
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'events.c2cglobal.com',
+            'accept': 'application/json; version=bevy.1.0',
+            'accept-language': 'en',
+            'content-type': 'application/json',
+            'referer': 'https://events.c2cglobal.com/events/',
             **UA_HINTS,
         }

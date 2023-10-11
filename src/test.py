@@ -6,8 +6,9 @@ import pytest
 import requests
 
 from fetch import DataManager, main
-from services import (CONF_TECH_URL, EVENTBRITE_URL, GDG_URL, LOCATIONS,
-                      MEETUP_URL, ConfTechService, GDGService, MeetupService)
+from services import (C2CGLOBAL_URL, CONF_TECH_URL, EVENTBRITE_URL, GDG_URL,
+                      LOCATIONS, MEETUP_URL, C2CGlobalService, ConfTechService,
+                      GDGService, MeetupService)
 
 MOCK_DIR = 'mock_data'
 URL_MAPPINGS = {
@@ -15,6 +16,7 @@ URL_MAPPINGS = {
     MEETUP_URL: "meetup.json",
     CONF_TECH_URL: "conf_tech.json",
     GDG_URL: "gdg.json",
+    C2CGLOBAL_URL: "c2c_global.json",
 }
 
 
@@ -33,6 +35,7 @@ def test_main_integration(monkeypatch):
     (MeetupService(), "_fetch_page", (2, LOCATIONS[0], '')),
     (ConfTechService(), "fetch_events", tuple()),
     (GDGService(), "fetch_events", tuple()),
+    (C2CGlobalService(), "fetch_events", tuple()),
 ])
 def test_integration(monkeypatch, service, method_name, methods_args):
     actual_result = getattr(service, method_name)(*methods_args)

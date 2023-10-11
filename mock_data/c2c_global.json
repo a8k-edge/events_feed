@@ -1,0 +1,52 @@
+{
+    "location":{"city":"Anywhere","country":"Earth","latitude":"","longitude":"","chapter_region":""},
+    "results": [
+        {
+            "id": 242,
+            "title": "2Chat France: Google Cloud",
+            "description_short": "Get ready to connect with other Google Cloud customers in your area. 2Chat France: Google Cloud sessions will take place on every other Thursday and will be held in French.",
+            "picture": {
+              "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-c2cglobal/events/2Chat%2520Bevy%2520Thumbnail_pqyS34b.jpg",
+              "path": "events/2Chat Bevy Thumbnail_pqyS34b.jpg",
+              "thumbnail_width": 400,
+              "thumbnail_height": 400,
+              "thumbnail_format": "auto",
+              "thumbnail_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-c2cglobal/events/2Chat%2520Bevy%2520Thumbnail_pqyS34b.jpg"
+            },
+            "chapter": {
+              "chapter_location": "Virtual (US)",
+              "city": "Virtual",
+              "country": "US",
+              "country_name": "United States of America",
+              "description": "<h2>Communities change the world.</h2><p>C2C events gather cloud professionals globally to participate in discussions and workshops, learn techniques and tactics, and hear from industry thought leaders and heroes.</p><p>Gain insights from the best in the cloud industry and make real-life connections with your peers.</p><p>Continue the conversation in our forums on <a href=\"https://community.c2cglobal.com/\">community.c2cglobal.com</a>.</p>",
+              "id": 9,
+              "hide_country_info": true,
+              "logo": {
+                "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-c2cglobal/chapter_banners/Chapter%2520Thumbnail%2520Image_2560x650_XcSdaYf.jpg",
+                "path": "chapter_banners/Chapter Thumbnail Image_2560x650_XcSdaYf.jpg",
+                "thumbnail_width": 400,
+                "thumbnail_height": 400,
+                "thumbnail_format": "auto",
+                "thumbnail_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fit,dpr_2,f_auto,g_center,h_400,q_auto:good,w_400/v1/gcs/platform-data-c2cglobal/chapter_banners/Chapter%2520Thumbnail%2520Image_2560x650_XcSdaYf.jpg"
+              },
+              "state": "",
+              "timezone": "America/Chicago",
+              "title": "Virtual",
+              "relative_url": "/virtual/",
+              "url": "https://events.c2cglobal.com/virtual/"
+            },
+            "city": "Virtual",
+            "start_date": "2023-10-12T13:00:00+02:00",
+            "url": "https://events.c2cglobal.com/events/details/c2c-events-virtual-presents-2chat-france-google-cloud-2023-10-12/",
+            "relative_url": "/events/details/c2c-events-virtual-presents-2chat-france-google-cloud-2023-10-12/",
+            "video_url": null,
+            "event_type_title": "2Chat Virtual Event",
+            "event_type_logo": {},
+            "tags": [
+              "Google Cloud Strategy"
+            ],
+            "allows_cohosting": false,
+            "result_type": "upcoming_event"
+        }
+    ]
+}
