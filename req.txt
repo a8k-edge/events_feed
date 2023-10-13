@@ -10,3 +10,5 @@ pytest
 pytest-cov
 pytz
 jmespath
+beautifulsoup4
+dateutil

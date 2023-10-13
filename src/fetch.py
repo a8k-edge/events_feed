@@ -11,8 +11,13 @@ from typing import Any, Callable, Dict, List, Union
 import jmespath
 from prettytable import PrettyTable
 
-from services import (C2CGlobalService, ConfTechService, GDGService,
-                      MeetupService)
+from services import (BloombergService, C2CGlobalService, CassandraService,
+                      ConfTechService, DatabricksService, DatastaxService,
+                      DbtService, DevEventsService, EventycoService,
+                      GDGService, HopsworksService, LinuxFoundationService,
+                      MeetupService, PostgresService, PythonService,
+                      RedisService, ScalaLangService, TechCrunchService,
+                      TechMemeService, WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -36,6 +41,22 @@ class Source(Enum):
     CONFTECH = "ConfTech"
     GCD = "GCD"
     C2CGLOBAL = "C2C Global"
+    DATABRICKS = "Databricks"
+    DATASTAX = "Datastax"
+    SCALA_LANG = "Scala Lang"
+    CASSANDRA = "Cassandra"
+    LINUX_FOUNDATION = "Linux Foundation"
+    WEAVIATE = "Weaviate"
+    REDIS = "Redis"
+    POSTGRES = "Postgres"
+    HOPSWORKS = "Hopsworks.ai"
+    PYTHON = "Python"
+    EVENTYCO = "Eventyco"
+    DBT = "dbt"
+    DEV_EVENTS = "dev.events"
+    TECH_CRUNCH = "TechCrunch"
+    TECH_MEME = "TechMeme"
+    BLOOMBERG = "Bloomberg"
 
 
 def main(delta_days: int = 3) -> None:
@@ -46,6 +67,22 @@ def main(delta_days: int = 3) -> None:
     gdg_events = GDGService().fetch_events()
     conf_tech_events = ConfTechService().fetch_events()
     c2c_global_events = C2CGlobalService().fetch_events()
+    databricks_events = DatabricksService().fetch_events()
+    datastax_events = DatastaxService().fetch_events()
+    scala_lang_events = ScalaLangService().fetch_events()
+    cassandra_events = CassandraService().fetch_events()
+    linux_foundation_events = LinuxFoundationService().fetch_events()
+    weaviate_events = WeaviateService().fetch_events()
+    redis_events = RedisService().fetch_events()
+    postgres_events = PostgresService().fetch_events()
+    hopsworks_events = HopsworksService().fetch_events()
+    python_events = PythonService().fetch_events()
+    eventyco_events = EventycoService().fetch_events()
+    dbt_events = DbtService().fetch_events()
+    devevents_events = DevEventsService().fetch_events()
+    tech_crunch_events = TechCrunchService().fetch_events()
+    tech_meme_events = TechMemeService().fetch_events()
+    bloomberg_events = BloombergService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
@@ -53,6 +90,22 @@ def main(delta_days: int = 3) -> None:
         (Source.MEETUP.value, meetup_events),
         (Source.CONFTECH.value, conf_tech_events),
         (Source.C2CGLOBAL.value, c2c_global_events),
+        (Source.DATABRICKS.value, databricks_events),
+        (Source.DATASTAX.value, datastax_events),
+        (Source.SCALA_LANG.value, scala_lang_events),
+        (Source.CASSANDRA.value, cassandra_events),
+        (Source.LINUX_FOUNDATION.value, linux_foundation_events),
+        (Source.WEAVIATE.value, weaviate_events),
+        (Source.REDIS.value, redis_events),
+        (Source.POSTGRES.value, postgres_events),
+        (Source.HOPSWORKS.value, hopsworks_events),
+        (Source.PYTHON.value, python_events),
+        (Source.EVENTYCO.value, eventyco_events),
+        (Source.DBT.value, dbt_events),
+        (Source.DEV_EVENTS.value, devevents_events),
+        (Source.TECH_CRUNCH.value, tech_crunch_events),
+        (Source.TECH_MEME.value, tech_meme_events),
+        (Source.BLOOMBERG.value, bloomberg_events),
     )
     DataManager.save_data(events)
 
@@ -61,25 +114,44 @@ def transform_events(
     *event_groups: tuple[str, list[dict[str, Collection[str]]]],
 ) -> list[dict[str, str | None]]:
     schema_map: Dict[str, List[Transformer]] = {
-        "id": ["id"],
+        "id": ["id", "uuid", "type._id"],
         "title": ["title", "name"],
         "start_time": [
+            "start_time",
             "dateTime",
             # gcd start_time handle
             lambda d: None if 'start_time' in d else get_value(d, 'start_date'),
             "start_date+'T'+start_time",
             "startDate",
+            "fieldDateTimeTimezone[0].startDate",
+            "dates[0].date+'T'+dates[0].start",
+            "start.date+'T'+start.time",
         ],
         "end_time": [
+            "end_time",
             "endTime",
             # gcd end_time handle
             lambda d: None if 'end_time' in d else get_value(d, 'end_date'),
             "end_date+'T'+end_time",
+            "fieldDateTimeTimezone[0].endDate",
+            "dates[0].date+'T'+dates[0].end",
+            "end.date+'T'+end.time",
         ],
-        "timezone": ["timezone"],
+        "timezone": [
+            "timezone",
+            "fieldDateTimeTimezone[0].timezone",
+            "dates[0].dstimezone",
+            "timeZone",
+        ],
         "going": ["going"],
         "description": ["description", "summary", "event_type_title+'\n'+chapter.description"],
-        "event_url": ["eventUrl", "url"],
+        "event_url": [
+            "event_url",
+            "eventUrl",
+            "url",
+            "fieldEventUrl.url.path",
+            "buttonLink.rawValue",
+        ],
         "image_url": ["group.groupPhoto.source", "image.original.url"],
         "is_online_event": ["onlineVenue", "is_online_event", "online", "event_type"],
     }

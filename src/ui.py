@@ -81,12 +81,27 @@ class EventManager:
         return df_events
 
     def format_data(self, df_events):
-        dt_format = '%a %H:%M'
+        now = datetime.now(pytz.timezone('EET'))
 
-        df_events['start_time'] = df_events['start_time'].dt.tz_convert(pytz.timezone('EET'))
-        df_events['start_time'] = df_events['start_time'].dt.strftime(dt_format)
-        df_events['end_time'] = df_events['end_time'].dt.tz_convert(pytz.timezone('EET'))
-        df_events['end_time'] = df_events['end_time'].dt.strftime(dt_format)
+        def custom_format(dt):
+            if pd.isna(dt):
+                return ''
+
+            days_difference = (dt - now).days
+
+            if -3 <= days_difference <= 3:
+                return dt.strftime('%a %H:%M')
+            else:
+                return dt.strftime('%b %d %H:%M')
+
+        df_events['start_time'] = df_events['start_time'].dt\
+            .tz_convert(pytz.timezone('EET'))\
+            .apply(custom_format)
+
+        df_events['end_time'] = df_events['end_time'].dt\
+            .tz_convert(pytz.timezone('EET'))\
+            .apply(custom_format)
+        # .apply(lambda x: x.strftime(custom_format(x)))
 
         df_events['title'] = df_events.apply(
             lambda x: f'<div><a href="{x["event_url"]}">{x["title"]}</a></div>',
@@ -109,14 +124,23 @@ class EventManager:
         )
         styler = df_events.style.set_table_styles(
             {
-                'index_level_0': [{'selector': '', 'props': 'white-space: nowrap !important;'}],
-                'index_level_1': [{'selector': '', 'props': 'white-space: nowrap !important;'}],
                 'End time': [{'selector': '', 'props': 'white-space: nowrap !important;'}],
                 'Going': [{'selector': 'td', 'props': 'text-align: right;'}],
-            }, overwrite=False,
+            },
+            overwrite=False,
         ).format({
-            'Going': lambda x: str(int(x)) if x == x else 'Unknown',
+            'Going': lambda x: str(int(x)) if x == x else '',
         })
+        styler = styler.set_table_styles([
+            {
+                'selector': '.level0',
+                'props': 'white-space: nowrap !important; font-weight: normal;'
+            },
+            {
+                'selector': '.level1',
+                'props': 'font-weight: normal;'
+            }
+        ], overwrite=False)
 
         last_data_date = datetime.fromisoformat(self.data['date'] if self.data else '')
         time_ago = humanize.naturaltime(datetime.now() - last_data_date)

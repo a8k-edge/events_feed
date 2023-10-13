@@ -1,19 +1,47 @@
+import json
 import logging
+import re
 import secrets
 import time
+import uuid
 from collections.abc import Collection
 from datetime import datetime, timedelta, timezone
 from typing import Any, Final, NamedTuple
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
+import jmespath
+import pytz
 import requests
+from bs4 import BeautifulSoup
+from dateutil import parser
+
+from tz import whois_timezone_info
 
 EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
 MEETUP_URL = 'https://www.meetup.com/gql'
 CONF_TECH_URL = 'https://29flvjv5x9-dsn.algolia.net/1/indexes/*/queries'
 GDG_URL = 'https://gdg.community.dev/api/event/'
 C2CGLOBAL_URL = 'https://events.c2cglobal.com/api/search/'
+DATABRICKS_URL = 'https://www.databricks.com/en-website-assets/page-data/events/page-data.json'
+DATASTAX_URL = 'https://bbnkhnhl.apicdn.sanity.io/v2022-01-05/data/query/production'
+SCALA_LANG_URL = 'https://www.scala-lang.org/events/'
+CASSANDRA_URL = 'https://cassandra.apache.org/_/events.html'
+LINUX_FOUNDATION_URL = 'https://events.linuxfoundation.org/'
+WEAVIATE_URL = 'https://core.service.elfsight.com/p/boot/'
+REDIS_URL = 'https://redis.com/api/archive'
+POSTGRES_URL = 'https://www.postgresql.org/about/events/'
+HOPSWORKS_URL = 'https://www.hopsworks.ai/events'
+PYTHON_URL = 'https://www.python.org/events/'
+EVENTYCO_URL = (
+    'https://www.eventyco.com/events/conferences'
+    '/tech~scala~elixir~data~devops~sre~security~rust~kafka~golang'
+)
+DBT_URL = 'https://www.getdbt.com/events'
+DEV_EVENTS_URL = 'https://dev.events/api/events/search'
+TECH_CRUNCH_URL = 'https://techcrunch.com/wp-json/wp/v2/tc_events'
+TECH_MEME_URL = 'https://www.techmeme.com/events'
+BLOOMBERG_URL = 'https://www.bloomberglive.com/calendar/'
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -27,6 +55,10 @@ UA_HINTS = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
     ),
+}
+ACCEPT_HEADERS = {
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,fr;q=0.6,uk;q=0.5,ar;q=0.4,de;q=0.3',  # noqa: E501
 }
 
 
@@ -299,9 +331,9 @@ class ConfTechService:
 
     def get_data(self) -> str:
         return (
-            '{"requests":[{"indexName":"prod_conferences","params":"facetFilters=%5B%5B%22topics%3Adevops%22%5D%5D&facets=%5B%22topics%22%2C%22continent%22%2C%22country%22%2C%22offersSignLanguageOrCC%22%5D&filters=startDateUnix%3E1695754192&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=600&maxValuesPerFacet=100&page=0&query=&tagFilters="},{"indexName":"prod_conferences","params":"analytics=false&clickAnalytics=false&facets=topics&filters='  # noqa: E501
-            f'startDateUnix%3E{time.time()}'
-            '&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=0&maxValuesPerFacet=100&page=0&query="}]}'  # noqa: E501
+            '{"requests":[{"indexName":"prod_conferences","params":"facetFilters=%5B%5B%22topics%3Adevops%22%5D%5D&facets=%5B%22topics%22%2C%22continent%22%2C%22country%22%2C%22offersSignLanguageOrCC%22%5D'  # noqa: E501
+            f'&filters=startDateUnix%3E{time.time()}'
+            '&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=600&maxValuesPerFacet=100&page=0&query=&tagFilters="}]}'  # noqa: E501
         )
 
 
@@ -362,5 +394,756 @@ class C2CGlobalService:
             'accept-language': 'en',
             'content-type': 'application/json',
             'referer': 'https://events.c2cglobal.com/events/',
+            **UA_HINTS,
+        }
+
+
+class DatabricksService:
+    """
+        https://www.databricks.com/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Databricks Events")
+        response = requests.get(DATABRICKS_URL, headers=self.get_headers())
+        data = response.json()
+        events = jmespath.search('result.pageContext.globalContext.eventsData.eventsEN', data)
+        filtred_events = self.filter_events(events)
+        return filtred_events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.databricks.com',
+            **ACCEPT_HEADERS,
+            'referer': 'https://www.databricks.com/events',
+            **UA_HINTS,
+        }
+
+    def filter_events(self, events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        current_utc_time = datetime.utcnow().date()
+
+        def is_upcoming(event):
+            dateTimeData = event.get('fieldDateTimeTimezone', [])
+
+            if (
+                not dateTimeData
+                or 'startDate' not in dateTimeData[0]
+                or 'timezone' not in dateTimeData[0]
+            ):
+                return False
+
+            start_date_str = dateTimeData[0]['startDate']
+            timezone_str = dateTimeData[0]['timezone']
+
+            start_date = datetime.strptime(start_date_str, "%Y-%m-%d %H:%M:%S %Z")
+            event_utc_time = start_date.astimezone(pytz.timezone(timezone_str)).astimezone(pytz.utc)
+            event_utc_date = event_utc_time.date()
+            return event_utc_date >= current_utc_time
+
+        return list(filter(is_upcoming, events))
+
+
+class DatastaxService:
+    """
+        https://www.datastax.com/ko/events?mode=calendar
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Datastax Events")
+        today = datetime.today()
+        params = {
+            "$search": '""',
+            "$from": '"' + today.strftime('%Y-%m-%d') + '"',
+            "$to": '"' + (today + timedelta(days=30)).strftime('%Y-%m-%d') + '"',
+            "$start": '0',
+            "$end": '24',
+        }
+        url = DATASTAX_URL + '?query=%0A%20%20%7B%0A%20%20%20%20%22results%22%3A%20*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%20%5D%20%7C%20order(dates%5B0%5D.date%20asc)%20%20%7B%0A%20%20%20%20%20%20%0Aattendance-%3E%2C%0Adates%2C%0Aintro%2C%0Atitle%2C%0Atype-%3E%2C%0A%22slug%22%3A%20seo.slug.current%2C%0A%0A%20%20%20%20%7D%2C%0A%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%20%5D)%2C%0A%20%20%20%20%22filters%22%3A%20%7B%0A%20%20%20%20%20%20%22attendance%22%3A%20*%5B_type%20%3D%3D%20%22event.attendance%22%5D%20%7B%0A%20%20%20%20%20%20%20%20_id%2C%0A%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%26%26%20references(%5E._id)%20%26%26%20true%5D)%2C%0A%20%20%20%20%20%20%7D%20%7C%20order(name%20asc)%20%5Bcount%20%3E%200%5D%2C%0A%20%20%20%20%20%20%22audience%22%3A%20*%5B_type%20%3D%3D%20%22event.audience%22%5D%20%7B%0A%20%20%20%20%20%20%20%20_id%2C%0A%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%26%26%20references(%5E._id)%20%26%26%20true%5D)%2C%0A%20%20%20%20%20%20%7D%20%7C%20order(name%20asc)%20%5Bcount%20%3E%200%5D%2C%0A%20%20%20%20%20%20%22industry%22%3A%20*%5B_type%20%3D%3D%20%22event.industry%22%5D%20%7B%0A%20%20%20%20%20%20%20%20_id%2C%0A%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%26%26%20references(%5E._id)%20%26%26%20true%5D)%2C%0A%20%20%20%20%20%20%7D%20%7C%20order(name%20asc)%20%5Bcount%20%3E%200%5D%2C%0A%20%20%20%20%20%20%22region%22%3A%20*%5B_type%20%3D%3D%20%22event.region%22%5D%20%7B%0A%20%20%20%20%20%20%20%20_id%2C%0A%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%26%26%20references(%5E._id)%20%26%26%20true%5D)%2C%0A%20%20%20%20%20%20%7D%20%7C%20order(name%20asc)%20%5Bcount%20%3E%200%5D%2C%0A%20%20%20%20%20%20%22type%22%3A%20*%5B_type%20%3D%3D%20%22event.type%22%5D%20%7B%0A%20%20%20%20%20%20%20%20_id%2C%0A%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%22count%22%3A%20count(*%5B_type%20%3D%3D%20%22event%22%20%26%26%20contentHidden%20!%3D%20true%20%26%26%20!(_id%20in%20path(%22drafts.**%22))%20%26%26%20count((dates%5B%5D.date)%5B%40%20%3E%3D%20%24from%20%26%26%20%40%20%3C%3D%20%24to%5D)%20%3E%200%20%26%26%20references(%5E._id)%20%26%26%20true%5D)%2C%0A%20%20%20%20%20%20%7D%20%7C%20order(name%20asc)%20%5Bcount%20%3E%200%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%7D%0A%20%20'  # noqa: E501
+        response = requests.get(url, params=params, headers=self.get_headers())
+        data = response.json()
+        events = data['result']['results']
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'bbnkhnhl.apicdn.sanity.io',
+            **ACCEPT_HEADERS,
+            'accept': 'application/json',
+            'origin': 'https://www.datastax.com',
+            'referer': 'https://www.datastax.com/',
+            **UA_HINTS,
+        }
+
+
+class ScalaLangService:
+    """
+        https://www.scala-lang.org/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Scala Lang Events")
+        response = requests.get(SCALA_LANG_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el in soup.select('a.training-item'):
+            start_end_str = (el
+                             .select_one('div.training-text p:nth-of-type(2)')
+                             .get_text(strip=True)
+                             )
+
+            start, _, end = start_end_str.partition(' - ')
+            start_iso = datetime.strptime(start, "%d %B %Y").isoformat()
+            end_iso = datetime.strptime(end, "%d %B %Y").isoformat()
+            events.append({
+                'id': str(uuid.uuid4()),
+                'event_url': el.get('href'),
+                'title': el.select_one('h4').get_text(strip=True),
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.scala-lang.org',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+
+class CassandraService:
+    """
+        https://cassandra.apache.org/_/events.html
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Cassandra Events")
+        response = requests.get(CASSANDRA_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el in soup.select('div#all-tiles .openblock.card'):
+            start_end_str = el.select_one('h4').get_text(strip=True)
+            start_iso, end_iso = self.parse_date(start_end_str)
+
+            events.append({
+                'id': str(uuid.uuid4()),
+                'event_url': el.select_one('.card-btn a').get('href'),
+                'title': el.select_one('h3').get_text(strip=True),
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+
+        filtred_events = self.filter_events(events)
+        return filtred_events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'cassandra.apache.org',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+    def parse_date(self, start_end_str):
+        """
+            values: 'December 12-13, 2023' or 'March 14, 2023'
+        """
+        date_format = "%B %d, %Y"
+        if "-" in start_end_str:
+            start_str, end_str = start_end_str.split("-")
+            start_str = start_str.strip()
+            end_str = end_str.strip()
+
+            # Extract year from start_str or end_str
+            year_match = re.search(r'\d{4}', start_end_str)
+            year = year_match.group(0) if year_match else None
+
+            # Ensure year is present in start_str and end_str
+            if year not in start_str:
+                start_str += ", " + year
+            if not re.search(r'[a-zA-Z]', end_str):
+                # If month is absent in end_str, prepend it from start_str
+                end_str = start_str.split(" ")[0] + " " + end_str
+            if year not in end_str:
+                end_str += ", " + year
+
+            start_iso = datetime.strptime(start_str, date_format).isoformat()
+            end_iso = datetime.strptime(end_str, date_format).isoformat()
+        else:
+            start_iso = end_iso = datetime.strptime(start_end_str.strip(), date_format).isoformat()
+        return start_iso, end_iso
+
+    def filter_events(self, events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        current_utc_time = datetime.utcnow().date()
+
+        def is_upcoming(event):
+            end_date = datetime.fromisoformat(event['end_time'])
+            event_date = end_date.date()
+            return event_date >= current_utc_time
+
+        return list(filter(is_upcoming, events))
+
+
+class LinuxFoundationService:
+    """
+        https://events.linuxfoundation.org/about/calendar/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Linux Foundation Events")
+        url = LINUX_FOUNDATION_URL + '?sfid=138&sf_action=get_data&sf_data=all&lang=en'
+        response = requests.get(url, headers=self.get_headers())
+        html_text = response.json()['results']
+        soup = BeautifulSoup(html_text, 'html.parser')
+
+        events = []
+        for el in soup.select('article'):
+            start_end_str = el.select_one('span.date').get_text()
+            start_iso, end_iso = self.parse_date(start_end_str)
+            events.append({
+                'id': el.get('id'),
+                'title': el.select_one('h5').get_text(strip=True),
+                'event_url': el.select_one('h5 a')['href'],
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'cassandra.apache.org',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+    def parse_date(self, date_str):
+        """
+            Values:
+            ' Oct 16–17, 2023 '
+            'Nov 6, 2023'
+            'Apr 29–May 1, 2024'
+        """
+        parts = date_str.strip().split('–')
+
+        if len(parts) == 1:
+            # Single date
+            start_iso = end_iso = parser.parse(parts[0]).isoformat()
+        else:
+            first_part = parts[0].strip()
+            second_part = parts[1].strip()
+
+            month = first_part.split()[0]
+            year = second_part.split()[-1]
+
+            if not re.search('[a-zA-Z]', second_part):
+                # Same month range (e.g., Oct 16–17, 2023)
+                second_part = f"{month} {second_part}"
+
+            first_part = f"{first_part} {year}"
+
+            start_iso = parser.parse(first_part).isoformat()
+            end_iso = parser.parse(second_part).isoformat()
+
+        return start_iso, end_iso
+
+
+class WeaviateService:
+    """
+        https://weaviate.io/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Weavite Events")
+
+        params = {
+            'page': 'https://weaviate.io/events',
+            'w': '01a3e7d9-f320-4491-a464-8339fafe3e80',
+        }
+        response = requests.get(WEAVIATE_URL, params=params, headers=self.get_headers())
+        data = response.json()
+
+        events = jmespath.search('data.widgets | values(@) | [0].data.settings.events', data)
+        today = datetime.now()
+        upcomming_events = [
+            event
+            for event in events
+            if datetime.strptime(event['end']['date'], "%Y-%m-%d") >= today
+        ]
+
+        return upcomming_events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'core.service.elfsight.com',
+            **ACCEPT_HEADERS,
+            'origin': 'https://weaviate.io',
+            'referer': 'https://weaviate.io/',
+            **UA_HINTS,
+        }
+
+
+class RedisService:
+    """
+        https://redis.com/events-and-webinars/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Redis Events")
+
+        data = {
+            'wpx_api': 'archive',
+            'wpx_paging': '1',
+            'wpx_cpt': 'wpx-webinars-od',
+            'wpx_loop': 'webinar',
+            'wpx_language': 'en',
+            'wpx_count': '21',
+        }
+        # Pagination stops when no events with date
+        has_next = True
+        page = 1
+        events = []
+
+        while has_next:
+            data['wpx_paging'] = str(page)
+            response = requests.post(REDIS_URL, headers=self.get_headers(), data=data)
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            for el in soup.select('div.events-item'):
+                start_str = el.select_one('span.tableau-result-date').get_text(strip=True)
+                try:
+                    start_iso = parser.parse(start_str).isoformat()
+                except parser.ParserError:
+                    has_next = False
+                    break
+
+                events.append({
+                    'id': str(uuid.uuid4()),
+                    'event_url': el.select_one('a').get('href'),
+                    'title': el.select_one('p.tableau-result-desc').get_text(strip=True),
+                    'start_time': start_iso,
+                })
+            page += 1
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'redis.com',
+            **ACCEPT_HEADERS,
+            'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'origin': 'https://redis.com',
+            'referer': 'https://redis.com/events-and-webinars/',
+            **UA_HINTS,
+        }
+
+
+class PostgresService:
+    """
+        https://www.postgresql.org/about/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Postgres Events")
+        response = requests.get(POSTGRES_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el_hr in soup.select('hr.eventseparator'):
+            title_div, date_div = el_hr.find_next_siblings('div', limit=2)
+
+            start_str, _, end_str = date_div.select_one('strong')\
+                .get_text(strip=True)\
+                .partition(' – ')
+
+            # Start date should always exists.
+            start_iso = parser.parse(start_str).isoformat()
+            end_iso = None
+            if end_str:
+                end_iso = parser.parse(end_str).isoformat()
+
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': title_div.select_one('a').get_text(strip=True),
+                'event_url': title_div.select_one('a').get('href'),
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.postgresql.org',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+
+class HopsworksService:
+    """
+        https://www.hopsworks.ai/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Hopsworks Events")
+        response = requests.get(HOPSWORKS_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el in soup.select('div[data-w-tab="Tab 1"] .w-dyn-list .w-dyn-item'):
+            date_els = (el
+                        .select_one('.event_details')
+                        .select('.event_date:not(.w-condition-invisible)')
+                        )
+            date_str = date_els[0].get_text(strip=True)
+            start_end_time_str = date_els[1].select_one('div').get_text(strip=True)
+            tz = date_els[1].select('div')[1].get_text(strip=True)
+
+            start_str, _, end_str = start_end_time_str.partition(' // ')
+            if end_str:
+                end_str = date_str + ' ' + end_str + ' ' + tz
+            start_str = date_str + ' ' + start_str + ' ' + tz
+
+            start_iso = parser.parse(
+                start_str,
+                fuzzy=True,
+                tzinfos={tz: int(whois_timezone_info[tz])},
+            ).isoformat()
+
+            end_iso = None
+            if end_str:
+                end_iso = parser.parse(
+                    end_str,
+                    fuzzy=True,
+                    tzinfos={tz: int(whois_timezone_info[tz])},
+                ).isoformat()
+
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': el.select_one('.type-div').get_text(strip=True),
+                'event_url': el.select_one('a').get('href'),
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.hopsworks.ai',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+
+class PythonService:
+    """
+        https://www.python.org/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Python Events")
+        response = requests.get(PYTHON_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el in soup.select('.list-recent-events li'):
+            start_str = el.select_one('time').get('datetime')
+            start_iso = parser.parse(start_str).isoformat()
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': el.select_one('h3').get_text(strip=True),
+                'event_url': "https://www.python.org" + el.select_one('a').get('href'),
+                'start_time': start_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.python.org',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            'referer': 'https://www.google.com/',
+            **UA_HINTS,
+        }
+
+
+class EventycoService:
+    """
+        https://www.eventyco.com/events/conferences/tech~scala~elixir~data~devops~sre~security~rust~kafka~golang
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Eventyco Events")
+
+        events = []
+        names = set()
+        has_next = True
+        page = 1
+        date_threshold = datetime.now() + timedelta(days=10)
+
+        while has_next:
+            url = EVENTYCO_URL + f'~{page}'
+            response = requests.get(url, headers=self.get_headers())
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            for ld_script in soup.select('script[type="application/ld+json"]'):
+                data = json.loads(ld_script.text)
+
+                name = data['name']
+                if name in names:
+                    continue
+                names.add(name)
+
+                start_date_str = data['startDate']
+                start_date = parser.parse(start_date_str)
+                if start_date > date_threshold:
+                    has_next = False
+                    break
+
+                events.append({
+                    'id': str(uuid.uuid4()),
+                    'title': name,
+                    'event_url': data['organizer']['url'],
+                    'start_time': start_date_str,
+                    'end_time': data['endDate'],
+                })
+
+            page += 1
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.eventyco.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class DbtService:
+    """
+        https://www.getdbt.com/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching dbt Events")
+        response = requests.get(DBT_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for el in soup.select('#all-posts-container article'):
+            title = el['data-title']
+            date_el = el.select_one('.blog-posts__card-content span.d-block')
+            if date_el is None:
+                # Featured with no date
+                continue
+
+            date_str = date_el.get_text(strip=True).split(' - ')[0]
+            date_iso = parser.parse(date_str).isoformat()
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': title,
+                'event_url': el.select_one('a')['href'],
+                'start_time': date_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.getdbt.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class DevEventsService:
+    """
+        https://dev.events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching DevEvents Events")
+
+        events = []
+        has_next = True
+        date_threshold = datetime.now().date() + timedelta(days=10)
+        page = 0
+
+        while has_next:
+            params = {
+                'start': str(page),
+                'sorting': 'startDate',
+                'x': 'true',
+            }
+            response = requests.get(DEV_EVENTS_URL, params=params, headers=self.get_headers())
+            data = response.json()
+
+            has_next = data[1]['more']
+            events += data[0]
+
+            last_date = parser.parse(data[0][-1]['startDate']).date()
+            if last_date > date_threshold:
+                has_next = False
+            page += 1
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'Accept': 'application/json, text/plain, */*',
+            'Referer': 'https://dev.events/',
+            **UA_HINTS,
+        }
+
+
+class TechCrunchService:
+    """
+        https://techcrunch.com/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching DevEvents Events")
+
+        events = []
+        params = {
+            '_embed': 'true',
+            'upcoming': 'true',
+            'parent': '0',
+            'cachePrevention': '0',
+        }
+        response = requests.get(TECH_CRUNCH_URL, params=params, headers=self.get_headers())
+        data = response.json()
+        for event in data:
+            start_iso = parser.parse(event['dates']['begin']).isoformat()
+            end_iso = parser.parse(event['dates']['end']).isoformat()
+
+            events.append({
+                'id': event['id'],
+                'title': event['title']['rendered'],
+                'event_url': event['link'],
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'techcrunch.com',
+            **ACCEPT_HEADERS,
+            'content-type': 'application/json; charset=utf-8',
+            'referer': 'https://techcrunch.com/events/',
+            **UA_HINTS,
+        }
+
+
+class TechMemeService:
+    """
+        https://www.techmeme.com/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching TechMeme Events")
+        response = requests.get(TECH_MEME_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        date_threshold = datetime.now() + timedelta(days=30)
+        events = []
+
+        for el in soup.select('#events div.rhov'):
+            divs = el.select('div')[:2]
+            range_date_str = divs[0].get_text(strip=True)
+            title = divs[1].get_text(strip=True)
+
+            start_datetime = end_datetime = None
+            year = datetime.now().year
+            if '-' in range_date_str:
+                start_str, _, end_str = range_date_str.partition('-')
+                start_month = start_str.split()[0]
+
+                start_datetime = parser.parse(start_str + f' {year}')
+                if end_str[0].isdigit():
+                    end_datetime = parser.parse(start_month + end_str + f' {year}')
+                else:
+                    end_datetime = parser.parse(end_str + f' {year}')
+            else:
+                start_datetime = parser.parse(range_date_str + f' {year}')
+
+            if start_datetime > date_threshold:
+                break
+
+            start_iso = start_datetime.isoformat()
+            if end_datetime:
+                end_iso = end_datetime.isoformat()
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': title,
+                'event_url': 'https://www.techmeme.com' + el.select_one('a')['href'],
+                'start_time': start_iso,
+                'end_time': end_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.getdbt.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class BloombergService:
+    """
+        https://www.bloomberglive.com/calendar/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Bloomberg Events")
+        response = requests.get(BLOOMBERG_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        date_threshold = datetime.now() + timedelta(days=30)
+
+        for el in soup.select('main .grid-fullscreen article'):
+            a_el = el.select_one('a')
+            title = a_el.select_one('h2').get_text(strip=True)
+            start_datetime = parser.parse(a_el['data-eventdate'])
+
+            if start_datetime > date_threshold:
+                break
+            start_iso = start_datetime.isoformat()
+
+            events.append({
+                'id': str(uuid.uuid4()),
+                'title': title,
+                'event_url': a_el['href'],
+                'start_time': start_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'www.bloomberglive.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
             **UA_HINTS,
         }
