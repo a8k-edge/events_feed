@@ -81,12 +81,11 @@ class Calendar extends StreamlitComponentBase<State> {
         <a target="_blank" rel="noreferrer" href={arg.event.url}>
           {arg.event.title}
         </a>
-        {arg.event.extendedProps.going && (
-          <span style={{ float: "right" }}>
-            <span>({arg.event.extendedProps.going})&nbsp;</span>
-            {arg.event.extendedProps.source}
-          </span>
-        )}
+        <span style={{ float: "right" }}>
+          {arg.event.extendedProps.going &&
+            <span>({arg.event.extendedProps.going})&nbsp;</span>}
+          {arg.event.extendedProps.source}
+        </span>
       </div>
     );
   }
