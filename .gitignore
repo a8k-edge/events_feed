@@ -4,6 +4,7 @@
 data/
 logs/
 process_id.txt
+node_modules/
 
 *.log
 result.json
