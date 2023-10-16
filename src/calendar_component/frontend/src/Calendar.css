@@ -6,9 +6,94 @@
     --fc-list-event-hover-bg-color: var(--secondary-background-color);
 }
 
-.fc-list-event-title a{
+.fc-list-event-title a {
     font-weight: 700;
 }
+
 .fc-list-day {
     font-size: 1.3rem;
+}
+
+.fc .fc-scroller-liquid {
+    overflow: auto !important;
+}
+
+.fc-list-event-time, .fc-list-event-title span {
+    font-size: 14px;
+    color: #adadad;
+}
+
+.fc-list-event-title span {
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .fc .fc-list-sticky .fc-list-day > * {
+        z-index: 1;
+    }
+
+    .fc-event {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        flex-wrap: wrap;
+    }
+
+    table, tr, td {
+        border: none !important;
+    }
+
+    table td + td {
+        border-bottom: 1px solid var(--fc-border-color) !important;
+    }
+
+    .fc-list-event-time {
+        font-size: 13px;
+        color: #7b7b7b;
+        text-align: right;
+        width: 100% !important;
+        align-self: flex-start;
+        margin-left: auto;
+        padding-bottom: 0 !important;
+    }
+
+    .fc-list-event-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+        flex: 1;
+        position: relative;
+        padding-bottom: 22px !important;
+        padding-left: 8px !important;
+    }
+
+    .fc-list-event-title a {
+        color: rgb(106, 5, 114);
+        text-decoration: none;
+        flex: 1;
+    }
+
+    .fc-list-event-graphic {
+        width: 5px;
+        padding-right: 10px !important;
+        padding-bottom: 22px !important;
+    }
+
+    .fc-list-event-graphic, .fc-list-event-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .fc-list-event-title  span {
+        font-size: 13px;
+        color: #7b7b7b;
+    }
+
+    .fc-list-event-title > div > span {
+        position: absolute;
+        bottom: 6px;
+        right: 14px;
+        font-size: 0.8em;
+        text-align: right;
+        margin-top: 5px;
+    }
 }

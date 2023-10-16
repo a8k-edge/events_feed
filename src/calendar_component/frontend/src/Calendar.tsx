@@ -1,3 +1,4 @@
+import FullCalendar from "@fullcalendar/react"
 import adaptivePlugin from "@fullcalendar/adaptive" // premium
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
@@ -8,14 +9,9 @@ import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid" // premium
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline" // premium
 import timeGridPlugin from "@fullcalendar/timegrid"
 import timelinePlugin from "@fullcalendar/timeline" // premium
-
 import { EventClickArg } from "@fullcalendar/core"
-import FullCalendar from "@fullcalendar/react"
 import { ReactNode, createRef } from "react"
-import {
-  StreamlitComponentBase,
-  withStreamlitConnection,
-} from "streamlit-component-lib"
+import { StreamlitComponentBase, withStreamlitConnection } from "streamlit-component-lib"
 import styled from "styled-components"
 import "./Calendar.css"
 
@@ -28,25 +24,13 @@ interface State {
 
 const FullCalendarWrapper = styled.div<{ $customCSS?: string }>`
   ${(props) => props.$customCSS}
-`
+`;
+
 class Calendar extends StreamlitComponentBase<State> {
   calendarRef = createRef<HTMLDivElement>();
 
-  scrollToCurrentTime = () => {
-    const currentDate = new Date();
-    const formattedDay = currentDate.toISOString().split('T')[0];
-
-    if (!this.calendarRef.current) return
-    const dayElement = (this.calendarRef.current as HTMLElement).querySelector(`[data-date="${formattedDay}"]`);
-
-    if (dayElement) {
-      dayElement.scrollIntoView();
-    }
-  }
-
   componentDidMount() {
     super.componentDidMount?.();
-    // console.log(this.calendarRef.current)
     this.scrollToCurrentTime();
   }
 
@@ -83,22 +67,32 @@ class Calendar extends StreamlitComponentBase<State> {
     )
   }
 
-  private eventContent = (arg: any) => {
-    return <div>
-      <a target="_blank" rel="noreferrer" href={arg.event.url}>
-        {arg.event.title}
-      </a>
+  private scrollToCurrentTime() {
+    const currentDate = new Date();
+    const formattedDay = currentDate.toISOString().split('T')[0];
+    const dayElement = this.calendarRef.current?.querySelector(`[data-date="${formattedDay}"]`);
 
-      <span style={{float: "right"}}>
-        {arg.event.extendedProps.going &&
-          <span>({arg.event.extendedProps.going})&nbsp;</span>}
-        {arg.event.extendedProps.source}
-      </span>
-    </div>
+    dayElement?.scrollIntoView();
+  }
+
+  private eventContent = (arg: any) => {
+    return (
+      <div>
+        <a target="_blank" rel="noreferrer" href={arg.event.url}>
+          {arg.event.title}
+        </a>
+        {arg.event.extendedProps.going && (
+          <span style={{ float: "right" }}>
+            <span>({arg.event.extendedProps.going})&nbsp;</span>
+            {arg.event.extendedProps.source}
+          </span>
+        )}
+      </div>
+    );
   }
 
   private handleEventClick = (arg: EventClickArg) => {
-    arg.jsEvent.preventDefault()
+    arg.jsEvent.preventDefault();
     window.open(arg.event.url, "_blank");
   }
 }

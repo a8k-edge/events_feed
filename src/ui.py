@@ -40,14 +40,11 @@ SOURCE_COLORS = {
 
 
 def app() -> None:
-    st.set_page_config(page_title="Events Feed", page_icon="📆")
+    st.set_page_config(page_title="Events Feed", page_icon="📆", layout="wide")
 
     sidebar = st.sidebar
-    columns = sidebar.columns(2)
-    with columns[0]:
-        delta_days = sidebar.number_input('Delta Days', min_value=1, value=3)
-    with columns[1]:
-        fetch_button_clicked = sidebar.button('Fetch New Events')
+    delta_days = sidebar.number_input('Delta Days', min_value=1, value=3)
+    fetch_button_clicked = sidebar.button('Fetch New Events')
 
     if BackgroundProcessHandler.is_running():
         sidebar.warning(
@@ -56,19 +53,14 @@ def app() -> None:
         multiprocessing.Process(
             target=BackgroundProcessHandler.start, args=(main, (int(delta_days),)),
         ).start()
-        sidebar.warning(
-            'A background job is currently running with PID '
-            f'{BackgroundProcessHandler.get_pid()}.')
+        sidebar.warning('A background job is currently')
 
-    col1, col2 = sidebar.columns(2)
-    with col1:
-        min_going = sidebar.number_input('Filter by minimum Going', value=10)
-    with col2:
-        selected_sources = sidebar.multiselect(
-            "Select sources:",
-            options=[source.value for source in Source],
-            default=[],
-        )
+    min_going = sidebar.number_input('Filter by minimum Going', value=10)
+    selected_sources = sidebar.multiselect(
+        "Select sources:",
+        options=[source.value for source in Source],
+        default=[],
+    )
 
     event_manager = EventManager()
     if event_manager.data:
@@ -96,7 +88,7 @@ def app() -> None:
 
         calendar(
             events=events,
-            options={"initialView": "listMonth"},
+            options={"initialView": "listMonth", "height": 650},
             key=(selected_sources, min_going)
         )
 
@@ -117,9 +109,9 @@ class EventManager:
             object).where(df_events['going'].notna(), None)
 
         df_events['start_time'] = pd.to_datetime(
-            df_events['start_time'], utc=True, infer_datetime_format=True)
+            df_events['start_time'], utc=True, infer_datetime_format=True, format='mixed')
         df_events['end_time'] = pd.to_datetime(
-            df_events['end_time'], utc=True, infer_datetime_format=True)
+            df_events['end_time'], utc=True, infer_datetime_format=True, format='mixed')
 
         df_events['start_time'] = df_events['start_time'].dt.tz_convert(
             pytz.timezone('EET')).apply(self._custom_format)
