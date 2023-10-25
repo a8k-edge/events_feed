@@ -11,4 +11,5 @@ pytest-cov
 pytz
 jmespath
 beautifulsoup4
-dateutil
+python-dateutil
+chompjs

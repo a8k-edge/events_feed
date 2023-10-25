@@ -12,12 +12,13 @@ import jmespath
 from prettytable import PrettyTable
 
 from services import (BloombergService, C2CGlobalService, CassandraService,
-                      ConfTechService, DatabricksService, DatastaxService,
-                      DbtService, DevEventsService, EventycoService,
-                      GDGService, HopsworksService, LinuxFoundationService,
-                      MeetupService, PostgresService, PythonService,
-                      RedisService, ScalaLangService, TechCrunchService,
-                      TechMemeService, WeaviateService)
+                      CloudnairGoogleService, CohereService, ConfTechService,
+                      DatabricksService, DatastaxService, DbtService,
+                      DevEventsService, EventycoService, GDGService,
+                      HopsworksService, LinuxFoundationService, MeetupService,
+                      PostgresService, PythonService, RedisService,
+                      ScalaLangService, TechCrunchService, TechMemeService,
+                      WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -57,6 +58,8 @@ class Source(Enum):
     TECH_CRUNCH = "TechCrunch"
     TECH_MEME = "TechMeme"
     BLOOMBERG = "Bloomberg"
+    CLOUDNAIR_GOOGLE = "Cloudnair"
+    COHERE = "Cohere"
 
 
 def main(delta_days: int = 3) -> None:
@@ -83,11 +86,13 @@ def main(delta_days: int = 3) -> None:
     tech_crunch_events = TechCrunchService().fetch_events()
     tech_meme_events = TechMemeService().fetch_events()
     bloomberg_events = BloombergService().fetch_events()
+    cloudnair_events = CloudnairGoogleService().fetch_events()
+    cohere_events = CohereService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
-        (Source.GCD.value, gdg_events),
         (Source.MEETUP.value, meetup_events),
+        (Source.GCD.value, gdg_events),
         (Source.CONFTECH.value, conf_tech_events),
         (Source.C2CGLOBAL.value, c2c_global_events),
         (Source.DATABRICKS.value, databricks_events),
@@ -106,6 +111,8 @@ def main(delta_days: int = 3) -> None:
         (Source.TECH_CRUNCH.value, tech_crunch_events),
         (Source.TECH_MEME.value, tech_meme_events),
         (Source.BLOOMBERG.value, bloomberg_events),
+        (Source.CLOUDNAIR_GOOGLE.value, cloudnair_events),
+        (Source.COHERE.value, cohere_events),
     )
     DataManager.save_data(events)
 
@@ -114,11 +121,13 @@ def transform_events(
     *event_groups: tuple[str, list[dict[str, Collection[str]]]],
 ) -> list[dict[str, str | None]]:
     schema_map: Dict[str, List[Transformer]] = {
-        "id": ["id", "uuid", "type._id"],
+        "id": ["id", "uuid", "type._id", "_id"],
         "title": ["title", "name"],
         "start_time": [
             "start_time",
             "dateTime",
+            "start",
+            "dateTimeStart",
             # gcd start_time handle
             lambda d: None if 'start_time' in d else get_value(d, 'start_date'),
             "start_date+'T'+start_time",
@@ -130,6 +139,8 @@ def transform_events(
         "end_time": [
             "end_time",
             "endTime",
+            "end",
+            "dateTimeEnd",
             # gcd end_time handle
             lambda d: None if 'end_time' in d else get_value(d, 'end_date'),
             "end_date+'T'+end_time",

@@ -35,7 +35,14 @@ SOURCE_COLORS = {
     Source.DEV_EVENTS: "#073B4C",
     Source.TECH_CRUNCH: "#118AB2",
     Source.TECH_MEME: "#6A0572",
-    Source.BLOOMBERG: "#5A189A"
+    Source.BLOOMBERG: "#5A189A",
+    Source.CLOUDNAIR_GOOGLE: "#ABCDEF",
+    Source.COHERE: "#83C5BE",
+    # "Color1": "#FFDDD2",
+    # "Color2": "#FFC4D0",
+    # "Color3": "#FFAFB9",
+    # "Color4": "#FF90A3",
+    # "Color5": "#FF6B8D",
 }
 
 

@@ -14,6 +14,7 @@ import jmespath
 import pytz
 import requests
 from bs4 import BeautifulSoup
+from chompjs import parse_js_object
 from dateutil import parser
 
 from tz import whois_timezone_info
@@ -42,6 +43,8 @@ DEV_EVENTS_URL = 'https://dev.events/api/events/search'
 TECH_CRUNCH_URL = 'https://techcrunch.com/wp-json/wp/v2/tc_events'
 TECH_MEME_URL = 'https://www.techmeme.com/events'
 BLOOMBERG_URL = 'https://www.bloomberglive.com/calendar/'
+CLOUDNAIR_GOOGLE_URL = 'https://cloudonair.withgoogle.com/api/events?collection=6ce82b&order=asc&state=FUTURE&page=1&shallow=true'  # noqa: E501
+COHERE_URL = 'https://cohere.com/events'
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -493,8 +496,12 @@ class ScalaLangService:
                              )
 
             start, _, end = start_end_str.partition(' - ')
+
             start_iso = datetime.strptime(start, "%d %B %Y").isoformat()
-            end_iso = datetime.strptime(end, "%d %B %Y").isoformat()
+            end_iso = None
+            if end:
+                end_iso = datetime.strptime(end, "%d %B %Y").isoformat()
+
             events.append({
                 'id': str(uuid.uuid4()),
                 'event_url': el.get('href'),
@@ -829,7 +836,7 @@ class HopsworksService:
             events.append({
                 'id': str(uuid.uuid4()),
                 'title': el.select_one('.type-div').get_text(strip=True),
-                'event_url': el.select_one('a').get('href'),
+                'event_url': "https://www.hopsworks.ai" + el.select_one('a').get('href'),
                 'start_time': start_iso,
                 'end_time': end_iso,
             })
@@ -1069,6 +1076,8 @@ class TechMemeService:
             divs = el.select('div')[:2]
             range_date_str = divs[0].get_text(strip=True)
             title = divs[1].get_text(strip=True)
+            if title.startswith("Earnings: "):
+                continue
 
             start_datetime = end_datetime = None
             year = datetime.now().year
@@ -1143,6 +1152,57 @@ class BloombergService:
     def get_headers(self) -> dict[str, str]:
         return {
             'authority': 'www.bloomberglive.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class CloudnairGoogleService:
+    """
+        https://cloudonair.withgoogle.com/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Cloudnair Google Events")
+        response = requests.get(CLOUDNAIR_GOOGLE_URL, headers=self.get_headers())
+        data = response.json()
+        events = data['events']
+        for e in events:
+            e['event_url'] = 'https://cloudonair.withgoogle.com/events/' + e['url_slug']
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'cloudonair.withgoogle.com',
+            **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class CohereService:
+    """
+        https://cohere.com/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Cohere Events")
+        response = requests.get(COHERE_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        script = soup.select_one('#__NEXT_DATA__').text
+        data = parse_js_object(script)
+
+        events = data['props']['pageProps']['eventsList']
+        for e in events:
+            e['event_url'] = 'https://cohere.com/events/' + e['slug']['current']
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            'authority': 'cohere.com',
             **ACCEPT_HEADERS,
             'cache-control': 'max-age=0',
             **UA_HINTS,
