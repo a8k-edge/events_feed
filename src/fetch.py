@@ -11,7 +11,7 @@ from typing import Any, Callable, Dict, List, Union
 import jmespath
 from prettytable import PrettyTable
 
-from services import (BloombergService, C2CGlobalService, CassandraService,
+from services import (BloombergService, C2CGlobalService,
                       CloudnairGoogleService, CohereService, ConfTechService,
                       DatabricksService, DatastaxService, DbtService,
                       DevEventsService, EventycoService, GDGService,
@@ -66,6 +66,8 @@ def main(delta_days: int = 3) -> None:
     setup_logging()
 
     # eb_events = EventbriteService().fetch_events(delta_days)
+    # cassandra_events = CassandraService().fetch_events()
+
     meetup_events = MeetupService().fetch_events(delta_days)
     gdg_events = GDGService().fetch_events()
     conf_tech_events = ConfTechService().fetch_events()
@@ -73,7 +75,6 @@ def main(delta_days: int = 3) -> None:
     databricks_events = DatabricksService().fetch_events()
     datastax_events = DatastaxService().fetch_events()
     scala_lang_events = ScalaLangService().fetch_events()
-    cassandra_events = CassandraService().fetch_events()
     linux_foundation_events = LinuxFoundationService().fetch_events()
     weaviate_events = WeaviateService().fetch_events()
     redis_events = RedisService().fetch_events()
@@ -91,6 +92,8 @@ def main(delta_days: int = 3) -> None:
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
+        # (Source.CASSANDRA.value, cassandra_events),
+
         (Source.MEETUP.value, meetup_events),
         (Source.GCD.value, gdg_events),
         (Source.CONFTECH.value, conf_tech_events),
@@ -98,7 +101,6 @@ def main(delta_days: int = 3) -> None:
         (Source.DATABRICKS.value, databricks_events),
         (Source.DATASTAX.value, datastax_events),
         (Source.SCALA_LANG.value, scala_lang_events),
-        (Source.CASSANDRA.value, cassandra_events),
         (Source.LINUX_FOUNDATION.value, linux_foundation_events),
         (Source.WEAVIATE.value, weaviate_events),
         (Source.REDIS.value, redis_events),
@@ -126,7 +128,6 @@ def transform_events(
         "start_time": [
             "start_time",
             "dateTime",
-            "start",
             "dateTimeStart",
             # gcd start_time handle
             lambda d: None if 'start_time' in d else get_value(d, 'start_date'),
@@ -135,11 +136,11 @@ def transform_events(
             "fieldDateTimeTimezone[0].startDate",
             "dates[0].date+'T'+dates[0].start",
             "start.date+'T'+start.time",
+            "start",
         ],
         "end_time": [
             "end_time",
             "endTime",
-            "end",
             "dateTimeEnd",
             # gcd end_time handle
             lambda d: None if 'end_time' in d else get_value(d, 'end_date'),
@@ -147,6 +148,7 @@ def transform_events(
             "fieldDateTimeTimezone[0].endDate",
             "dates[0].date+'T'+dates[0].end",
             "end.date+'T'+end.time",
+            "end",
         ],
         "timezone": [
             "timezone",
@@ -154,7 +156,7 @@ def transform_events(
             "dates[0].dstimezone",
             "timeZone",
         ],
-        "going": ["going"],
+        "going": ["going", "rsvps.totalCount"],
         "description": ["description", "summary", "event_type_title+'\n'+chapter.description"],
         "event_url": [
             "event_url",
