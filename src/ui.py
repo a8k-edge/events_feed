@@ -38,7 +38,7 @@ SOURCE_COLORS = {
     Source.BLOOMBERG: "#5A189A",
     Source.CLOUDNAIR_GOOGLE: "#ABCDEF",
     Source.COHERE: "#83C5BE",
-    # "Color1": "#FFDDD2",
+    Source.SAMSUNG: "#FFDDD2",
     # "Color2": "#FFC4D0",
     # "Color3": "#FFAFB9",
     # "Color4": "#FF90A3",

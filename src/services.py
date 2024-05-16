@@ -45,6 +45,8 @@ TECH_MEME_URL = 'https://www.techmeme.com/events'
 BLOOMBERG_URL = 'https://www.bloomberglive.com/calendar/'
 CLOUDNAIR_GOOGLE_URL = 'https://cloudonair.withgoogle.com/api/events?collection=6ce82b&order=asc&state=FUTURE&page=1&shallow=true'  # noqa: E501
 COHERE_URL = 'https://cohere.com/events'
+SAMSUNG_URL = 'https://www.samsung.com/global/ir/ir-events-presentations/events/'
+
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
 UA_HINTS = {
@@ -1252,6 +1254,52 @@ class CohereService:
         return {
             'authority': 'cohere.com',
             **ACCEPT_HEADERS,
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
+        }
+
+
+class SamsungService:
+    """
+        https://www.samsung.com/global/ir/ir-events-presentations/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Samsung Events")
+        response = requests.get(SAMSUNG_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for event_el in soup.select('.ir-event-view-area .ir-event-list li'):
+
+            range_date_text = event_el.select_one('dd').text
+            start_datetime = end_datetime = None
+
+            if '-' in range_date_text:
+                start_date_text, _, end_date_text = range_date_text.partition('-')
+                year_partition, _, year = end_date_text.partition(',')
+                start_datetime = parser.parse(start_date_text + f' {year}')
+                end_datetime = parser.parse(year_partition + f' {year}')
+            else:
+                start_datetime = parser.parse(range_date_text)
+
+            start_iso = start_datetime.isoformat()
+            end_iso = end_datetime.isoformat() if end_datetime else None
+
+            events.append({
+                "title": event_el.select_one('dt').text,
+                "event_url": SAMSUNG_URL,
+                "start_time": start_iso,
+                "end_time": end_iso,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            **ACCEPT_HEADERS,
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,'
+            'image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
             'cache-control': 'max-age=0',
             **UA_HINTS,
         }
