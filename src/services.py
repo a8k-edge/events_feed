@@ -20,7 +20,7 @@ from dateutil import parser
 from tz import whois_timezone_info
 
 EVENTBRITE_URL = 'https://www.eventbrite.com/api/v3/destination/search/'
-MEETUP_URL = 'https://www.meetup.com/gql'
+MEETUP_URL = 'https://www.meetup.com/gql2'
 CONF_TECH_URL = 'https://29flvjv5x9-dsn.algolia.net/1/indexes/*/queries'
 GDG_URL = 'https://gdg.community.dev/api/event/'
 C2CGLOBAL_URL = 'https://events.c2cglobal.com/api/search/'
@@ -39,7 +39,7 @@ EVENTYCO_URL = (
     '/tech~scala~elixir~data~devops~sre~security~rust~kafka~golang'
 )
 DBT_URL = 'https://www.getdbt.com/events'
-DEV_EVENTS_URL = 'https://dev.events/api/events/search'
+DEV_EVENTS_URL = 'https://dev.events/'
 TECH_CRUNCH_URL = 'https://techcrunch.com/wp-json/wp/v2/tc_events'
 TECH_MEME_URL = 'https://www.techmeme.com/events'
 BLOOMBERG_URL = 'https://www.bloomberglive.com/calendar/'
@@ -219,10 +219,13 @@ class MeetupService:
             while has_next_page:
                 logging.info(f"Meetup Request start {location.name=} {page=}")
                 has_next_page, data = self._fetch_page(delta_days, location=location, cursor=cursor)
+                # logging.info(data)
                 if data:
-                    has_next_page = data['data']['rankedEvents']['pageInfo']['hasNextPage']
-                    cursor = data['data']['rankedEvents']['pageInfo']['endCursor']
-                    events += [event['node'] for event in data['data']['rankedEvents']['edges']]
+                    has_next_page = data['data']['result']['pageInfo']['hasNextPage']
+                    cursor = data['data']['result']['pageInfo']['endCursor']
+                    if cursor == '':
+                        has_next_page = False
+                    events += [event['node'] for event in data['data']['result']['edges']]
                     page += 1
 
         logging.info("Finished fetching Meetup events")
@@ -242,7 +245,12 @@ class MeetupService:
                 headers=self.get_headers(),
                 json=self.get_json(location=location, cursor=cursor, delta_days=delta_days),
             )
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
+            except requests.exceptions.HTTPError:
+                logging.info(
+                    f"{self.get_json(location=location, cursor=cursor, delta_days=delta_days)}")
+                raise
             data = response.json()
             return True, data
         except Exception as exc:
@@ -260,19 +268,24 @@ class MeetupService:
         end_date = start_date + timedelta(days=delta_days)
 
         ret_val: dict[str, Any] = {
-            'operationName': 'categorySearch',
+            'operationName': 'recommendedEventsWithSeries',
             'variables': {
                 'first': MEETUP_PAGE_SIZE,
                 'lat': location.lat,
                 'lon': location.lon,
                 'radius': location.radius,
-                'topicCategoryId': None,
                 'startDateRange': start_date.isoformat(timespec='seconds'),
                 'endDateRange': end_date.isoformat(timespec='seconds'),
-                'eventType': 'online',
+                'eventType': 'ONLINE',
                 'sortField': 'DATETIME',
             },
-            'query': 'query categorySearch($lat: Float!, $lon: Float!, $categoryId: Int, $topicCategoryId: Int, $startDateRange: ZonedDateTime, $endDateRange: ZonedDateTime, $first: Int, $after: String, $eventType: EventType, $radius: Int, $isHappeningNow: Boolean, $isStartingSoon: Boolean, $sortField: RankedEventsSortField) {\n  rankedEvents(\n    filter: {lat: $lat, lon: $lon, categoryId: $categoryId, topicCategoryId: $topicCategoryId, startDateRange: $startDateRange, endDateRange: $endDateRange, eventType: $eventType, radius: $radius, isHappeningNow: $isHappeningNow, isStartingSoon: $isStartingSoon}\n    input: {first: $first, after: $after}\n    sort: {sortField: $sortField}\n  ) {\n    pageInfo {\n      ...PageInfoDetails\n      __typename\n    }\n    count\n    edges {\n      node {\n        ...BuildMeetupEvent\n        isNewGroup\n        covidPrecautions {\n          venueType\n          __typename\n        }\n        __typename\n      }\n      recommendationId\n      recommendationSource\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment PageInfoDetails on PageInfo {\n  hasNextPage\n  endCursor\n  __typename\n}\n\nfragment BuildMeetupEvent on Event {\n  id\n  title\n  dateTime\n  endTime\n  description\n  duration\n  timezone\n  eventType\n  currency\n  images {\n    ...PhotoDetails\n    __typename\n  }\n  venue {\n    id\n    address\n    neighborhood\n    city\n    state\n    country\n    lat\n    lng\n    zoom\n    name\n    radius\n    __typename\n  }\n  onlineVenue {\n    type\n    url\n    __typename\n  }\n  isSaved\n  eventUrl\n  group {\n    ...BuildMeetupGroup\n    __typename\n  }\n  going\n  maxTickets\n  tickets(input: {first: 3}) {\n    ...TicketsConnection\n    __typename\n  }\n  isAttending\n  rsvpState\n  __typename\n}\n\nfragment PhotoDetails on Image {\n  id\n  baseUrl\n  preview\n  source\n  __typename\n}\n\nfragment BuildMeetupGroup on Group {\n  id\n  slug\n  isPrivate\n  isOrganizer\n  isNewGroup\n  ...GroupDetails\n  __typename\n}\n\nfragment GroupDetails on Group {\n  id\n  name\n  urlname\n  timezone\n  link\n  city\n  state\n  country\n  groupPhoto {\n    ...PhotoDetails\n    __typename\n  }\n  __typename\n}\n\nfragment TicketsConnection on EventTicketsConnection {\n  count\n  edges {\n    node {\n      id\n      user {\n        id\n        name\n        memberPhoto {\n          ...PhotoDetails\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n',  # noqa: E501
+            'extensions': {
+                'persistedQuery': {
+                    'version': 1,
+                    'sha256Hash': '6af218804f3fb79d0d3c4e8555be804b'
+                    'edee4b425ec1eec6b0479f5641f8b549',
+                },
+            },
         }
         if cursor:
             ret_val['variables']['after'] = cursor
@@ -465,6 +478,8 @@ class DatastaxService:
         response = requests.get(url, params=params, headers=self.get_headers())
         data = response.json()
         events = data['result']['results']
+        for i in range(len(events)):
+            events[i]["event_url"] = "https://www.datastax.com/ko/" + events[i]["slug"]
         return events
 
     def get_headers(self) -> dict[str, str]:
@@ -989,22 +1004,54 @@ class DevEventsService:
         events = []
         has_next = True
         date_threshold = datetime.now().date() + timedelta(days=10)
-        page = 0
+        page = 1
+        last_date = None
 
+        # TODO: parse ld instead of html
         while has_next:
-            params = {
-                'start': str(page),
-                'sorting': 'startDate',
-                'x': 'true',
-            }
-            response = requests.get(DEV_EVENTS_URL, params=params, headers=self.get_headers())
-            data = response.json()
+            response = requests.get(DEV_EVENTS_URL + f"?page={page}", headers=self.get_headers())
+            soup = BeautifulSoup(response.text, 'html.parser')
 
-            has_next = data[1]['more']
-            events += data[0]
+            for el in soup.select("#events .row.columns:not(.featured)"):
+                if el.select_one("nav") is not None:
+                    continue
+                range_date_str = str(el.select_one("time").find(text=True, recursive=False))
+                title = el.select_one("h2.title").get_text(strip=True)
 
-            last_date = parser.parse(data[0][-1]['startDate']).date()
-            if last_date > date_threshold:
+                start_datetime = end_datetime = None
+                year = datetime.now().year
+                if '-' in range_date_str:
+                    start_str, _, end_str = range_date_str.partition('-')
+                    start_month = start_str.split()[0]
+
+                    start_datetime = parser.parse(start_str + f' {year}')
+                    if end_str[0].isdigit():
+                        end_datetime = parser.parse(f'{start_month} {end_str} {year}')
+                    else:
+                        end_datetime = parser.parse(end_str + f' {year}')
+                else:
+                    start_datetime = parser.parse(range_date_str + f' {year}')
+
+                last_date = start_datetime.date()
+                if start_datetime.date() > date_threshold:
+                    break
+
+                start_iso = start_datetime.isoformat()
+                end_iso = None
+                if end_datetime:
+                    end_iso = end_datetime.isoformat()
+
+                events.append({
+                    'id': str(uuid.uuid4()),
+                    'title': title,
+                    'event_url': 'https://dev.events/' + el.select_one('h2.title a')['href'],
+                    'start_time': start_iso,
+                    'end_time': end_iso,
+                })
+
+            # TODO: handle the last page
+            # it is very unlikely we will reach last page earlier than date threshold
+            if last_date is None or last_date > date_threshold:
                 has_next = False
             page += 1
 
@@ -1012,7 +1059,7 @@ class DevEventsService:
 
     def get_headers(self) -> dict[str, str]:
         return {
-            'Accept': 'application/json, text/plain, */*',
+            'Accept': '*/*',
             'Referer': 'https://dev.events/',
             **UA_HINTS,
         }
@@ -1087,7 +1134,7 @@ class TechMemeService:
 
                 start_datetime = parser.parse(start_str + f' {year}')
                 if end_str[0].isdigit():
-                    end_datetime = parser.parse(start_month + end_str + f' {year}')
+                    end_datetime = parser.parse(f'{start_month} {end_str} {year}')
                 else:
                     end_datetime = parser.parse(end_str + f' {year}')
             else:
@@ -1097,6 +1144,7 @@ class TechMemeService:
                 break
 
             start_iso = start_datetime.isoformat()
+            end_iso = None
             if end_datetime:
                 end_iso = end_datetime.isoformat()
             events.append({
