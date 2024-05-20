@@ -17,9 +17,9 @@ from services import (BloombergService, C2CGlobalService,
                       DevEventsService, EventycoService, GDGService,
                       GithubService, HopsworksService, LinuxFoundationService,
                       MeetupService, NVIDIAService, PostgresService,
-                      PythonService, RedisService, SamsungService,
-                      ScalaLangService, TechCrunchService, TechMemeService,
-                      TSMCService, WeaviateService)
+                      PythonService, SamsungService, ScalaLangService,
+                      TechCrunchService, TechMemeService, TSMCService,
+                      WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -72,6 +72,7 @@ def main(delta_days: int = 3) -> None:
 
     # eb_events = EventbriteService().fetch_events(delta_days)
     # cassandra_events = CassandraService().fetch_events()
+    # redis_events = RedisService().fetch_events()
 
     meetup_events = MeetupService().fetch_events(delta_days)
     gdg_events = GDGService().fetch_events()
@@ -82,7 +83,6 @@ def main(delta_days: int = 3) -> None:
     scala_lang_events = ScalaLangService().fetch_events()
     linux_foundation_events = LinuxFoundationService().fetch_events()
     weaviate_events = WeaviateService().fetch_events()
-    redis_events = RedisService().fetch_events()
     postgres_events = PostgresService().fetch_events()
     hopsworks_events = HopsworksService().fetch_events()
     python_events = PythonService().fetch_events()
@@ -102,6 +102,7 @@ def main(delta_days: int = 3) -> None:
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
         # (Source.CASSANDRA.value, cassandra_events),
+        # (Source.REDIS.value, redis_events),
 
         (Source.MEETUP.value, meetup_events),
         (Source.GCD.value, gdg_events),
@@ -112,7 +113,6 @@ def main(delta_days: int = 3) -> None:
         (Source.SCALA_LANG.value, scala_lang_events),
         (Source.LINUX_FOUNDATION.value, linux_foundation_events),
         (Source.WEAVIATE.value, weaviate_events),
-        (Source.REDIS.value, redis_events),
         (Source.POSTGRES.value, postgres_events),
         (Source.HOPSWORKS.value, hopsworks_events),
         (Source.PYTHON.value, python_events),
