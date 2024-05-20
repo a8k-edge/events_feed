@@ -39,8 +39,8 @@ SOURCE_COLORS = {
     Source.CLOUDNAIR_GOOGLE: "#ABCDEF",
     Source.COHERE: "#83C5BE",
     Source.SAMSUNG: "#FFDDD2",
-    # "Color2": "#FFC4D0",
-    # "Color3": "#FFAFB9",
+    Source.TSMC: "#FFC4D0",
+    Source.NVIDIA: "#FFAFB9",
     # "Color4": "#FF90A3",
     # "Color5": "#FF6B8D",
 }
@@ -60,7 +60,7 @@ def app() -> None:
         multiprocessing.Process(
             target=BackgroundProcessHandler.start, args=(main, (int(delta_days),)),
         ).start()
-        sidebar.warning('A background job is currently')
+        sidebar.warning('A background job is currently running')
 
     min_going = sidebar.number_input('Filter by minimum Going', value=10)
     selected_sources = sidebar.multiselect(

@@ -16,9 +16,10 @@ from services import (BloombergService, C2CGlobalService,
                       DatabricksService, DatastaxService, DbtService,
                       DevEventsService, EventycoService, GDGService,
                       HopsworksService, LinuxFoundationService, MeetupService,
-                      PostgresService, PythonService, RedisService,
-                      SamsungService, ScalaLangService, TechCrunchService,
-                      TechMemeService, WeaviateService)
+                      NVIDIAService, PostgresService, PythonService,
+                      RedisService, SamsungService, ScalaLangService,
+                      TechCrunchService, TechMemeService, TSMCService,
+                      WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -61,6 +62,8 @@ class Source(Enum):
     CLOUDNAIR_GOOGLE = "Cloudnair"
     COHERE = "Cohere"
     SAMSUNG = "Samsung"
+    TSMC = "TSMC"
+    NVIDIA = "NVIDIA"
 
 
 def main(delta_days: int = 3) -> None:
@@ -91,6 +94,8 @@ def main(delta_days: int = 3) -> None:
     cloudnair_events = CloudnairGoogleService().fetch_events()
     cohere_events = CohereService().fetch_events()
     samsung_events = SamsungService().fetch_events()
+    tsmc_events = TSMCService().fetch_events()
+    nvidia_events = NVIDIAService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
@@ -118,6 +123,8 @@ def main(delta_days: int = 3) -> None:
         (Source.CLOUDNAIR_GOOGLE.value, cloudnair_events),
         (Source.COHERE.value, cohere_events),
         (Source.SAMSUNG.value, samsung_events),
+        (Source.TSMC.value, tsmc_events),
+        (Source.NVIDIA.value, nvidia_events),
     )
     DataManager.save_data(events)
 

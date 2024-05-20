@@ -13,3 +13,4 @@ jmespath
 beautifulsoup4
 python-dateutil
 chompjs
+cloudscraper

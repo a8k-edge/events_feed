@@ -10,6 +10,7 @@ from typing import Any, Final, NamedTuple
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
+import cloudscraper
 import jmespath
 import pytz
 import requests
@@ -46,6 +47,8 @@ BLOOMBERG_URL = 'https://www.bloomberglive.com/calendar/'
 CLOUDNAIR_GOOGLE_URL = 'https://cloudonair.withgoogle.com/api/events?collection=6ce82b&order=asc&state=FUTURE&page=1&shallow=true'  # noqa: E501
 COHERE_URL = 'https://cohere.com/events'
 SAMSUNG_URL = 'https://www.samsung.com/global/ir/ir-events-presentations/events/'
+TSMC_URL = 'https://pr.tsmc.com/english/events/tsmc-events'
+NVIDIA_URL = 'https://www.nvidia.com/content/dam/en-zz/Solutions/about-nvidia/calendar/en-us.json'
 
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
@@ -1302,4 +1305,74 @@ class SamsungService:
             'image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
             'cache-control': 'max-age=0',
             **UA_HINTS,
+        }
+
+
+class TSMCService:
+    """
+        https://pr.tsmc.com/english/events/tsmc-events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching TSMC Events")
+        scraper = cloudscraper.create_scraper()
+        response = scraper.get(TSMC_URL)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for event_el in soup.select('.view-id-events li.item'):
+            date_text = event_el.select_one('.event-date-location div').text
+            start_datetime = parser.parse(date_text)
+
+            events.append({
+                "title": event_el.select_one('h3.event-title').text,
+                "event_url": event_el.select_one('div.event-register a').get('href'),
+                "start_time": start_datetime.isoformat(),
+                "end_time": None,
+            })
+
+        return events
+
+
+class NVIDIAService:
+    """
+        https://www.nvidia.com/en-us/events/
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching NVIDIA Events")
+        ts = str(time.time()).replace('.', '')
+        response = requests.get(NVIDIA_URL + f'?{ts}', headers=self.get_headers())
+        data = response.json()
+        dtnow = datetime.now()
+
+        events = []
+        for origin in data:
+            if origin['startDate'] == 'TBC':
+                continue
+
+            start_date = parser.parse(origin['startDate'])
+
+            end_date = None
+            if 'endDate' in origin and origin['endDate'] != "":
+                end_date = parser.parse(origin['endDate'])
+                if end_date < dtnow:
+                    continue
+            elif start_date < dtnow:
+                continue
+            events.append({
+                "title": origin['title'],
+                "event_url": origin['url'],
+                "start_time": start_date.isoformat(),
+                "end_time": end_date.isoformat() if end_date else None,
+            })
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            **ACCEPT_HEADERS,
+            **UA_HINTS,
+            'priority': 'u=1, i',
+            'referer': 'https://www.nvidia.com/en-us/events/',
+            'x-queueit-ajaxpageurl': 'https%3A%2F%2Fwww.nvidia.com%2Fen-us%2Fevents%2F',
         }
