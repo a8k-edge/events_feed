@@ -18,8 +18,8 @@ from services import (BloombergService, C2CGlobalService,
                       GithubService, HopsworksService, LinuxFoundationService,
                       MeetupService, NVIDIAService, PostgresService,
                       PythonService, SamsungService, ScalaLangService,
-                      TechCrunchService, TechMemeService, TSMCService,
-                      WeaviateService)
+                      SnowflakeService, TechCrunchService, TechMemeService,
+                      TSMCService, WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -65,6 +65,7 @@ class Source(Enum):
     TSMC = "TSMC"
     NVIDIA = "NVIDIA"
     GITHUB = "Github"
+    SNOWFLAKE = "Snowflake"
 
 
 def main(delta_days: int = 3) -> None:
@@ -98,6 +99,7 @@ def main(delta_days: int = 3) -> None:
     tsmc_events = TSMCService().fetch_events()
     nvidia_events = NVIDIAService().fetch_events()
     github_events = GithubService().fetch_events()
+    snowflake_events = SnowflakeService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
@@ -128,6 +130,7 @@ def main(delta_days: int = 3) -> None:
         (Source.TSMC.value, tsmc_events),
         (Source.NVIDIA.value, nvidia_events),
         (Source.GITHUB.value, github_events),
+        (Source.SNOWFLAKE.value, snowflake_events),
     )
     DataManager.save_data(events)
 

@@ -42,7 +42,7 @@ SOURCE_COLORS = {
     Source.TSMC: "#FFC4D0",
     Source.NVIDIA: "#FFAFB9",
     Source.GITHUB: "#FF90A3",
-    # "Color5": "#FF6B8D",
+    Source.SNOWFLAKE: "#FF6B8D",
 }
 
 
