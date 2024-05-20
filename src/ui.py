@@ -41,7 +41,7 @@ SOURCE_COLORS = {
     Source.SAMSUNG: "#FFDDD2",
     Source.TSMC: "#FFC4D0",
     Source.NVIDIA: "#FFAFB9",
-    # "Color4": "#FF90A3",
+    Source.GITHUB: "#FF90A3",
     # "Color5": "#FF6B8D",
 }
 

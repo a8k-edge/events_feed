@@ -49,6 +49,7 @@ COHERE_URL = 'https://cohere.com/events'
 SAMSUNG_URL = 'https://www.samsung.com/global/ir/ir-events-presentations/events/'
 TSMC_URL = 'https://pr.tsmc.com/english/events/tsmc-events'
 NVIDIA_URL = 'https://www.nvidia.com/content/dam/en-zz/Solutions/about-nvidia/calendar/en-us.json'
+GITHUB_URL = 'https://github.com/events'
 
 EB_THRESHOLD = 15
 MEETUP_PAGE_SIZE = 50
@@ -1375,4 +1376,46 @@ class NVIDIAService:
             'priority': 'u=1, i',
             'referer': 'https://www.nvidia.com/en-us/events/',
             'x-queueit-ajaxpageurl': 'https%3A%2F%2Fwww.nvidia.com%2Fen-us%2Fevents%2F',
+        }
+
+
+class GithubService:
+    """
+        https://github.com/events
+    """
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        logging.info("Fetching Github Events")
+        response = requests.get(GITHUB_URL, headers=self.get_headers())
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        events = []
+        for event_el in soup.select('main ul.list-style-none.mb-4 li div.d-lg-block'):
+
+            range_date_text = event_el.select_one('p.color-fg-muted.f5').text
+            start_datetime = end_datetime = None
+
+            if '-' in range_date_text:
+                start_date_text, _, end_date_text = range_date_text.partition('-')
+                start_datetime = parser.parse(start_date_text)
+                end_datetime = parser.parse(end_date_text)
+            else:
+                start_datetime = parser.parse(range_date_text)
+
+            events.append({
+                "title": event_el.select_one('h3').text,
+                "event_url": event_el.select_one('h3 a').get('href'),
+                "start_time": start_datetime.isoformat(),
+                "end_time": end_datetime.isoformat() if end_datetime else None,
+            })
+
+        return events
+
+    def get_headers(self) -> dict[str, str]:
+        return {
+            **ACCEPT_HEADERS,
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,'
+            'image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'cache-control': 'max-age=0',
+            **UA_HINTS,
         }

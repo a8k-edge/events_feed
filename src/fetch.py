@@ -15,11 +15,11 @@ from services import (BloombergService, C2CGlobalService,
                       CloudnairGoogleService, CohereService, ConfTechService,
                       DatabricksService, DatastaxService, DbtService,
                       DevEventsService, EventycoService, GDGService,
-                      HopsworksService, LinuxFoundationService, MeetupService,
-                      NVIDIAService, PostgresService, PythonService,
-                      RedisService, SamsungService, ScalaLangService,
-                      TechCrunchService, TechMemeService, TSMCService,
-                      WeaviateService)
+                      GithubService, HopsworksService, LinuxFoundationService,
+                      MeetupService, NVIDIAService, PostgresService,
+                      PythonService, RedisService, SamsungService,
+                      ScalaLangService, TechCrunchService, TechMemeService,
+                      TSMCService, WeaviateService)
 
 Transformer = Union[str, Callable]
 
@@ -64,6 +64,7 @@ class Source(Enum):
     SAMSUNG = "Samsung"
     TSMC = "TSMC"
     NVIDIA = "NVIDIA"
+    GITHUB = "Github"
 
 
 def main(delta_days: int = 3) -> None:
@@ -96,6 +97,7 @@ def main(delta_days: int = 3) -> None:
     samsung_events = SamsungService().fetch_events()
     tsmc_events = TSMCService().fetch_events()
     nvidia_events = NVIDIAService().fetch_events()
+    github_events = GithubService().fetch_events()
 
     events = transform_events(
         # (Source.EVENTBRITE.value, eb_events),
@@ -125,6 +127,7 @@ def main(delta_days: int = 3) -> None:
         (Source.SAMSUNG.value, samsung_events),
         (Source.TSMC.value, tsmc_events),
         (Source.NVIDIA.value, nvidia_events),
+        (Source.GITHUB.value, github_events),
     )
     DataManager.save_data(events)
 
