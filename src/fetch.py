@@ -74,6 +74,8 @@ def main(delta_days: int = 3) -> None:
     # eb_events = EventbriteService().fetch_events(delta_days)
     # cassandra_events = CassandraService().fetch_events()
     # redis_events = RedisService().fetch_events()
+    # tech_crunch_events = TechCrunchService().fetch_events()
+    # cohere_events = CohereService().fetch_events()
 
     meetup_events = MeetupService().fetch_events(delta_days)
     gdg_events = GDGService().fetch_events()
@@ -90,11 +92,9 @@ def main(delta_days: int = 3) -> None:
     eventyco_events = EventycoService().fetch_events()
     dbt_events = DbtService().fetch_events()
     devevents_events = DevEventsService().fetch_events()
-    tech_crunch_events = TechCrunchService().fetch_events()
     tech_meme_events = TechMemeService().fetch_events()
     bloomberg_events = BloombergService().fetch_events()
     cloudnair_events = CloudnairGoogleService().fetch_events()
-    cohere_events = CohereService().fetch_events()
     samsung_events = SamsungService().fetch_events()
     tsmc_events = TSMCService().fetch_events()
     nvidia_events = NVIDIAService().fetch_events()
@@ -105,6 +105,8 @@ def main(delta_days: int = 3) -> None:
         # (Source.EVENTBRITE.value, eb_events),
         # (Source.CASSANDRA.value, cassandra_events),
         # (Source.REDIS.value, redis_events),
+        # (Source.TECH_CRUNCH.value, tech_crunch_events),
+        # (Source.COHERE.value, cohere_events),
 
         (Source.MEETUP.value, meetup_events),
         (Source.GCD.value, gdg_events),
@@ -121,11 +123,9 @@ def main(delta_days: int = 3) -> None:
         (Source.EVENTYCO.value, eventyco_events),
         (Source.DBT.value, dbt_events),
         (Source.DEV_EVENTS.value, devevents_events),
-        (Source.TECH_CRUNCH.value, tech_crunch_events),
         (Source.TECH_MEME.value, tech_meme_events),
         (Source.BLOOMBERG.value, bloomberg_events),
         (Source.CLOUDNAIR_GOOGLE.value, cloudnair_events),
-        (Source.COHERE.value, cohere_events),
         (Source.SAMSUNG.value, samsung_events),
         (Source.TSMC.value, tsmc_events),
         (Source.NVIDIA.value, nvidia_events),

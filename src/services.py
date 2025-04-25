@@ -289,8 +289,7 @@ class MeetupService:
             'extensions': {
                 'persistedQuery': {
                     'version': 1,
-                    'sha256Hash': '415d07768f1183a2a33a4eeb477f726'
-                    '9e547a28735d3dccffad73a0c1b878c92',
+                    'sha256Hash': '23a3bb8cf7dd8f0e806c265be70fd604eae93ba9cced577c5f51c94889d3901f',
                 },
             },
         }
@@ -446,17 +445,17 @@ class DatabricksService:
         current_utc_time = datetime.utcnow().date()
 
         def is_upcoming(event):
-            dateTimeData = event.get('fieldDateTimeTimezone', [])
+            dateTimeData = event.get('fieldDateTimeTimezone', {})
 
             if (
                 not dateTimeData
-                or 'startDate' not in dateTimeData[0]
-                or 'timezone' not in dateTimeData[0]
+                or 'startDate' not in dateTimeData
+                or 'timezone' not in dateTimeData
             ):
                 return False
 
-            start_date_str = dateTimeData[0]['startDate']
-            timezone_str = dateTimeData[0]['timezone']
+            start_date_str = dateTimeData['startDate']
+            timezone_str = dateTimeData['timezone']
 
             start_date = datetime.strptime(start_date_str, "%Y-%m-%d %H:%M:%S %Z")
             event_utc_time = start_date.astimezone(pytz.timezone(timezone_str)).astimezone(pytz.utc)
@@ -692,8 +691,8 @@ class WeaviateService:
         logging.info("Fetching Weavite Events")
 
         params = {
-            'page': 'https://weaviate.io/events',
-            'w': '01a3e7d9-f320-4491-a464-8339fafe3e80',
+            'page': 'https://weaviate.io/community/events',
+            'w': '0068937f-3d15-4161-9289-c657562f9f91',
         }
         response = requests.get(WEAVIATE_URL, params=params, headers=self.get_headers())
         data = response.json()
@@ -1022,38 +1021,23 @@ class DevEventsService:
             for el in soup.select("#events .row.columns:not(.featured)"):
                 if el.select_one("nav") is not None:
                     continue
-                range_date_str = str(el.select_one("time").find(text=True, recursive=False))
-                title = el.select_one("h2.title").get_text(strip=True)
+                ld_json_str = el.select_one('script[type="application/ld+json"]')
+                event_data = json.loads(ld_json_str.string)
 
-                start_datetime = end_datetime = None
-                year = datetime.now().year
-                if '-' in range_date_str:
-                    start_str, _, end_str = range_date_str.partition('-')
-                    start_month = start_str.split()[0]
-
-                    start_datetime = parser.parse(start_str + f' {year}')
-                    if end_str[0].isdigit():
-                        end_datetime = parser.parse(f'{start_month} {end_str} {year}')
-                    else:
-                        end_datetime = parser.parse(end_str + f' {year}')
-                else:
-                    start_datetime = parser.parse(range_date_str + f' {year}')
-
+                start_datetime = datetime.fromisoformat(event_data.get('startDate'))
+                end_datetime = datetime.fromisoformat(event_data.get('endDate')) if event_data.get('endDate') else None
+                
+                # Check if the event is past our date threshold
                 last_date = start_datetime.date()
                 if start_datetime.date() > date_threshold:
-                    break
-
-                start_iso = start_datetime.isoformat()
-                end_iso = None
-                if end_datetime:
-                    end_iso = end_datetime.isoformat()
+                    continue
 
                 events.append({
                     'id': str(uuid.uuid4()),
-                    'title': title,
-                    'event_url': 'https://dev.events/' + el.select_one('h2.title a')['href'],
-                    'start_time': start_iso,
-                    'end_time': end_iso,
+                    'title': event_data.get('name'),
+                    'event_url': event_data.get('url'),
+                    'start_time': start_datetime.isoformat() if start_datetime else None,
+                    'end_time': end_datetime.isoformat() if end_datetime else None,
                 })
 
             # TODO: handle the last page
@@ -1276,7 +1260,8 @@ class SamsungService:
 
         events = []
         for event_el in soup.select('.ir-event-view-area .ir-event-list li'):
-
+            if not event_el.select_one('dd'):
+                continue
             range_date_text = event_el.select_one('dd').text
             start_datetime = end_datetime = None
 
